@@ -1,0 +1,60 @@
+version: '3'
+services:
+  # client-api:
+  #   container_name: client-api
+  #   build:
+  #     context: ../client-api
+  #     dockerfile: ../client-api/Dockerfile
+  #   expose:
+  #     - '4000'
+  #   ports:
+  #     - '4000:4000'
+  #   volumes:
+  #     - '../../client-api/src:/app/src'
+  #     - '../../client-api/coverage:/app/coverage'
+  #     - '../../client-api/.env:/app/.env'
+  #   # env_file: ./api/.env
+  #   environment:
+  #     - GOOGLE_APPLICATION_CREDENTIALS=./sa.json
+  #   entrypoint: npm run dev
+
+  client-client:
+    container_name: client-client
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    expose:
+      - '8000'
+    ports:
+      - '8000:8000'
+    volumes:
+      - './src:/app/src'
+      - './cypress:/app/cypress'
+      - './gatsby-config.js:/app/gatsby-config.js'
+      - './gatsby-browser.js:/app/gatsby-browser.js'
+    env_file: .env.development
+    entrypoint: npm run develop
+    depends_on:
+      - client-api
+
+  client-storybook:
+    container_name: client-storybook
+    build:
+      context: .
+      dockerfile: ./docker/storybook.Dockerfile
+    expose:
+      - '6006'
+    ports:
+      - '6006:6006'
+    volumes:
+      - './src:/app/src'
+      - './gatsby-config.js:/app/gatsby-config.js'
+      - './gatsby-browser.js:/app/gatsby-browser.js'
+    env_file: .env.development
+    entrypoint: npm run storybook
+    # makes this less noisy
+    logging:
+      driver: 'none'
+    depends_on:
+      - client-client
+      # - client-api

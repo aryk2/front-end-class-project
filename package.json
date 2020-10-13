@@ -1,0 +1,27 @@
+{
+  "name": "front-end-class-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "plop": "./node_modules/ignw-project-generator/bin/cli.js",
+    "bootstrap": "lerna exec npm install",
+    "build:client": "lerna exec --scope @front-end-class-project/client npm run build",
+    "start:client": "lerna exec --scope @front-end-class-project/client npm start",
+    "test:client": "lerna exec --scope @front-end-class-project/client npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aryk2/front-end-class-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aryk2/front-end-class-project/issues"
+  },
+  "homepage": "https://github.com/aryk2/front-end-class-project#readme",
+  "workspaces": [
+    "client"
+  ]
+}
