@@ -1,9 +1,6 @@
 {
   "compilerOptions": {
-    "strict": false,
-    "noImplicitAny": false,
-    "target": "es2019",
-    "downlevelIteration": true,
+    "target": "es5",
     "lib": [
       "dom",
       "dom.iterable",
@@ -13,45 +10,16 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "jsx": "preserve",
-    "module": "commonjs",
-    "isolatedModules": true,
-    "resolveJsonModule": true,
+    "module": "esnext",
     "moduleResolution": "node",
-    "baseUrl": ".",
-    "paths": {
-      "src/*": [
-        "./src/*"
-      ],
-      "components/*": [
-        "./src/components/*"
-      ],
-      "hooks/*": [
-        "./src/hooks/*"
-      ],
-      "providers/*": [
-        "./src/providers/*"
-      ],
-      "themes/*": [
-        "./src/themes/*"
-      ],
-      "util/*": [
-        "./src/util/*"
-      ],
-      "styles/*": [
-        "./src/styles/*"
-      ]
-    }
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react"
   },
   "include": [
-    "src",
-    "public/static/locales",
-    "bin"
-  ],
-  "exclude": [
-    "node_modules",
-    "*.test*"
+    "src"
   ]
 }
