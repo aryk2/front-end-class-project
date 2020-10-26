@@ -27,20 +27,12 @@ steps:
     entrypoint: npm
     args: ['run', 'build']
     env:
-      - NODE_ENV=$_NODE_ENV
-      - REACT_APP_MAPS_API_KEY=$_REACT_APP_MAPS_API_KEY
-      - REACT_APP_API_KEY=$_REACT_APP_API_KEY
-      - REACT_APP_PROJECT_ID=$PROJECT_ID
       - FIREBASE_TOKEN=$_FIREBASE_TOKEN
 
   - id:  Deploy static build to firebase hosting
     name: node:12.16.2
     dir: 'client'
     env:
-      - NODE_ENV=$_NODE_ENV
-      - REACT_APP_MAPS_API_KEY=$_REACT_APP_MAPS_API_KEY
-      - REACT_APP_API_KEY=$_REACT_APP_API_KEY
-      - REACT_APP_PROJECT_ID=$PROJECT_ID
       - FIREBASE_TOKEN=$_FIREBASE_TOKEN
     entrypoint: npm
     args: ['run', 'deploy:hosting', '--', '--token', '$_FIREBASE_TOKEN']
