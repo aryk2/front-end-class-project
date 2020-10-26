@@ -1,7 +1,4 @@
-# Todo add any api keys that are needed here
 
-# Extend Timeout due to long running e2e and redundant builds
-timeout: 35m0s
 steps:
   - id:  Install Dependencies
     name: node:12.16.2
