@@ -45,7 +45,7 @@ export const LaborInformation: FunctionComponent<LaborInformationProps> = (
       .then((response) => response.json())
       .then((jsonResponse) => {
         setLoading(true);
-        console.log(jsonResponse);
+
         setSept2020(jsonResponse.Results.series[0].data[0].value);
         setAug2020(jsonResponse.Results.series[0].data[1].value);
         setJuly2020(jsonResponse.Results.series[0].data[2].value);
@@ -66,15 +66,15 @@ export const LaborInformation: FunctionComponent<LaborInformationProps> = (
         setFeb2019(jsonResponse.Results.series[0].data[19].value);
         setJan2019(jsonResponse.Results.series[0].data[20].value);
 
-        setSept2018(jsonResponse.Results.series[0].data[12].value);
-        setAug2018(jsonResponse.Results.series[0].data[13].value);
-        setJuly2018(jsonResponse.Results.series[0].data[14].value);
-        setJune2018(jsonResponse.Results.series[0].data[15].value);
-        setMay2018(jsonResponse.Results.series[0].data[16].value);
-        setApril2018(jsonResponse.Results.series[0].data[17].value);
-        setMarch2018(jsonResponse.Results.series[0].data[18].value);
-        setFeb2018(jsonResponse.Results.series[0].data[19].value);
-        setJan2018(jsonResponse.Results.series[0].data[20].value);
+        setSept2018(jsonResponse.Results.series[0].data[24].value);
+        setAug2018(jsonResponse.Results.series[0].data[25].value);
+        setJuly2018(jsonResponse.Results.series[0].data[26].value);
+        setJune2018(jsonResponse.Results.series[0].data[27].value);
+        setMay2018(jsonResponse.Results.series[0].data[28].value);
+        setApril2018(jsonResponse.Results.series[0].data[29].value);
+        setMarch2018(jsonResponse.Results.series[0].data[30].value);
+        setFeb2018(jsonResponse.Results.series[0].data[31].value);
+        setJan2018(jsonResponse.Results.series[0].data[32].value);
       })
       .catch((error: any) => {
         console.error(error);
@@ -92,7 +92,7 @@ export const LaborInformation: FunctionComponent<LaborInformationProps> = (
   }, []);
 
   if (isLoaded === true) {
-    return <h1>{sept2020}</h1>;
+    return <h1></h1>;
   } else {
     return <h1></h1>;
   }
