@@ -1,13 +1,11 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
-import { Grid, Container, Button } from "@material-ui/core";
+import { Grid, Button, Box, Link } from "@material-ui/core";
 const apiKey = process.env.REACT_APP_FINNHUB_KEY;
 const newsCall =
   "https://finnhub.io/api/v1/news?category=general&token=" + apiKey;
 // @ts-ignore
 
-export interface NewsfeedProps {
-  news: any;
-}
+export interface NewsfeedProps {}
 
 export const Newsfeed: FunctionComponent<NewsfeedProps> = (props) => {
   const [isLoaded, setLoaded] = useState(false);
@@ -65,37 +63,58 @@ export const Newsfeed: FunctionComponent<NewsfeedProps> = (props) => {
     return (
       <Grid
         container
-        spacing={3}
+        spacing={1}
         direction="column"
-        justify="flex-start"
+        justify="center"
         alignItems="center"
       >
         <Grid item xs={4}>
-          <Container>{newsSource1}</Container>
-          <Container>{headline1}</Container>
-          <Container>
-            <Button color="primary" onClick={() => handleRedirect(link1)}>
-              Click here to find out more.
-            </Button>
-          </Container>
+          <Box
+            borderTop={1}
+            borderBottom={1}
+            textAlign="left"
+            fontSize={12}
+            pl={1}
+          >
+            {newsSource1}
+            <br />
+            <Link href="#" onClick={() => handleRedirect(link1)}>
+              {headline1}
+            </Link>
+          </Box>
         </Grid>
         <Grid item xs={4}>
-          <Container>{newsSource2}</Container>
-          <Container>{headline2}</Container>
-          <Container>
-            <Button color="primary" onClick={() => handleRedirect(link2)}>
-              Click here to find out more.
-            </Button>
-          </Container>
+          <Box borderBottom={1} textAlign="left" fontSize={12} pl={1}>
+            {newsSource2}
+            <br />
+            <Link href="#" onClick={() => handleRedirect(link2)}>
+              {headline2}
+            </Link>
+          </Box>
         </Grid>
         <Grid item xs={4}>
-          <Container>{newsSource3}</Container>
-          <Container>{headline3}</Container>
-          <Container>
-            <Button color="primary" onClick={() => handleRedirect(link3)}>
-              Click here to find out more.
-            </Button>
-          </Container>
+          <Box borderBottom={1} textAlign="left" fontSize={12} pl={1}>
+            {newsSource3}
+            <br />
+            <Link
+              href="#"
+              color="primary"
+              onClick={() => handleRedirect(link3)}
+            >
+              {headline3}
+            </Link>
+          </Box>
+        </Grid>
+        <Grid item xs={4}>
+          <Box textAlign="center" fontSize={16}>
+            <Link
+              href="#"
+              color="primary"
+              onClick={() => handleRedirect(link3)}
+            >
+              Click here to see more top stories
+            </Link>
+          </Box>
         </Grid>
       </Grid>
     );
