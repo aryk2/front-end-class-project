@@ -1,4 +1,5 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
+import Candlechart from "../candlechart";
 
 // @ts-ignore
 export interface StockPageProps {
@@ -8,12 +9,13 @@ export interface StockPageProps {
 const apiKey = process.env.REACT_APP_ALPHA_VANTAGE_KEY;
 
 export const StockPage: FunctionComponent<StockPageProps> = (props) => {
-  const [stock, setStock] = useState(props.stock);
+  const [stock, setStock] = useState(props.stock.toString());
   const [isLoaded, setLoaded] = useState(false);
   const [open, setOpen] = useState<any>([]);
   const [close, setClose] = useState<any>([]);
   const [high, setHigh] = useState<any>([]);
   const [low, setLow] = useState<any>([]);
+  const [dates, setDates] = useState<any>([]);
 
   const endpoint =
     "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" +
@@ -27,7 +29,7 @@ export const StockPage: FunctionComponent<StockPageProps> = (props) => {
   const lowExp = new RegExp(/(low":")[\d.]+"/, "g");
   const closeExp = new RegExp(/(close":")[\d.]+"/, "g");
   const numExp = new RegExp(/[\d.]+/, "g");
-
+  const dateExp = new RegExp(/[\d]{4}[-][\d]{2}[-][\d]{2}/, "g");
   const getData = async (endpoint: string) => {
     await fetch(endpoint)
       .then((response) => response.json())
@@ -39,6 +41,7 @@ export const StockPage: FunctionComponent<StockPageProps> = (props) => {
         let highTemp = temp.match(highExp);
         let lowTemp = temp.match(lowExp);
         let closeTemp = temp.match(closeExp);
+        let datesTemp = temp.match(dateExp);
 
         let openArr = [];
         for (let i = 0; i < openTemp!.length; ++i) {
@@ -63,6 +66,7 @@ export const StockPage: FunctionComponent<StockPageProps> = (props) => {
         setClose(closeArr);
         setLow(lowArr);
         setHigh(highArr);
+        setDates(datesTemp);
       })
       .catch((error: any) => {
         console.error(error);
@@ -80,7 +84,16 @@ export const StockPage: FunctionComponent<StockPageProps> = (props) => {
 
   if (isLoaded === true) {
     //console.log(data);
-    return <h1>We got it</h1>;
+    return (
+      <Candlechart
+        open={open}
+        close={close}
+        high={high}
+        low={low}
+        dates={dates}
+        symbol={stock}
+      />
+    );
   } else {
     return <h1>Nope</h1>;
   }
