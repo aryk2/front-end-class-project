@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from '@testing-library/react'
-import LaborInformation from '.'
+import LaborInformation from './LaborInformation'
 
 describe('LaborInformation', () => {
   it('should render the LaborInformation component', () => {

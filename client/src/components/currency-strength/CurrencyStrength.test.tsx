@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from '@testing-library/react'
-import CurrencyStrength from '.'
+import CurrencyStrength from './CurrencyStrength'
 
 describe('CurrencyStrength', () => {
   it('should render the CurrencyStrength component', () => {
