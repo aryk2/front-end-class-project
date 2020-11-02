@@ -12,12 +12,6 @@ steps:
     entrypoint: npm
     args: ['test']
 
-  - id:  Install Cypress/e2e Dependencies
-    name: cypress/base:12
-    dir: 'client'
-    entrypoint: npm
-    args: ['ci']
-
   - id:  Build Deployment Client Static Bundle
     name: node:12.16.2
     dir: 'client'
