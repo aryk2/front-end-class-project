@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
-import UnemploymentChart from "../unemployment-chart";
+import UnemploymentChart from "../unemployment-chart/UnemploymentChart";
 const laborKey = process.env.REACT_APP_BLS_KEY;
 const laborUrl =
   "https://api.bls.gov/publicAPI/v2/timeseries/data/LNS14000000?registrationkey=" +

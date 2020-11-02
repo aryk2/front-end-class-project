@@ -2,8 +2,8 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
 
-import Dashboard from './components/dashboard'
-import Error from './components/error'
+import Dashboard from './pages/dashboard'
+import Error from './pages/error'
 
 function App() {
   return (
