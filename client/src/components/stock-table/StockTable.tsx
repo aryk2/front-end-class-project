@@ -1,27 +1,45 @@
-import React, { FunctionComponent, useState, useEffect } from "react";
-import Table from "@material-ui/core";
+import React, { FunctionComponent } from "react";
+import Table, {
+  TableContainer,
+  TableRow,
+  TableHead,
+  TableCell,
+} from "@material-ui/core";
 // @ts-ignore
 export interface StockTableProps {
-  stock: string;
+  open: string;
+  current: string;
+  high: string;
+  low: string;
+  previousClose: string;
+  stockName: string;
+  date: string;
 }
-const apiKey = process.env.REACT_APP_FUNNHUB_KEY;
 
 const url = "https://www.finnhub.io/api/v1/quote?symbol=";
 export const StockTable: FunctionComponent<StockTableProps> = (props) => {
-  const [isLoaded, setLoaded] = useState(false);
-  const [stock, setStock] = useState(props.stock);
-  const [previousClose, setPreviousClose] = useState(null);
-  const [open, setOpen] = useState(null);
-  const [current, setCurrent] = useState(null);
-  const [high, setHigh] = useState(null);
-  const [low, setLow] = useState(null);
-
-  useEffect(() => {}, []);
-
-  if (isLoaded === false) {
-  } else {
-  }
-  return <></>;
+  return (
+    <TableContainer>
+      <h1>{props.stockName}</h1>
+      <h2>Last Updated: {props.date}</h2>
+      <TableHead>
+        <TableRow>
+          <TableCell>Current Price</TableCell>
+          <TableCell>Open Price</TableCell>
+          <TableCell>High</TableCell>
+          <TableCell>Low</TableCell>
+          <TableCell>Previous Close</TableCell>
+        </TableRow>
+      </TableHead>
+      <TableRow>
+        <TableCell>${props.current}</TableCell>
+        <TableCell>${props.open}</TableCell>
+        <TableCell>${props.high}</TableCell>
+        <TableCell>${props.low}</TableCell>
+        <TableCell>${props.previousClose}</TableCell>
+      </TableRow>
+    </TableContainer>
+  );
 };
 
 export default StockTable;

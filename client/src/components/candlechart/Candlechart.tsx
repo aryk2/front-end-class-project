@@ -26,11 +26,10 @@ export const Candlechart: FunctionComponent<CandlechartProps> = (props) => {
       text: str,
       align: "left",
     },
-    /*
+
     xaxis: {
       type: "datetime",
     },
-    */
   };
 
   const series = [

@@ -1,5 +1,7 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
 import Candlechart from "../candlechart";
+import StockTable from "../stock-table";
+import Container from "@material-ui/core";
 
 // @ts-ignore
 export interface StockPageProps {
@@ -34,8 +36,6 @@ export const StockPage: FunctionComponent<StockPageProps> = (props) => {
     await fetch(endpoint)
       .then((response) => response.json())
       .then((jsonResponse) => {
-        setLoaded(true);
-        console.log(jsonResponse);
         let temp = JSON.stringify(jsonResponse);
         let openTemp = temp.match(openExp);
         let highTemp = temp.match(highExp);
@@ -67,6 +67,7 @@ export const StockPage: FunctionComponent<StockPageProps> = (props) => {
         setLow(lowArr);
         setHigh(highArr);
         setDates(datesTemp);
+        setLoaded(true);
       })
       .catch((error: any) => {
         console.error(error);
@@ -83,20 +84,38 @@ export const StockPage: FunctionComponent<StockPageProps> = (props) => {
   }, []);
 
   if (isLoaded === true) {
-    //console.log(data);
+    let o = open[0];
+    let h = high[0];
+    let l = low[0];
+    let c = close[0];
+    let d = dates[0];
+    console.log(dates);
     return (
-      <Candlechart
-        open={open}
-        close={close}
-        high={high}
-        low={low}
-        dates={dates}
-        symbol={stock}
-      />
+      <div>
+        <Candlechart
+          open={open}
+          close={close}
+          high={high}
+          low={low}
+          dates={dates}
+          symbol={stock}
+        />
+        <StockTable
+          open={o}
+          high={h}
+          low={l}
+          previousClose={c}
+          stockName={stock}
+          date={d}
+          current={o}
+        />
+      </div>
     );
   } else {
     return <h1>Nope</h1>;
   }
 };
+/*
 
+        */
 export default StockPage;
