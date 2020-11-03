@@ -11,7 +11,7 @@ export interface StockPageProps {
 const apiKey = process.env.REACT_APP_ALPHA_VANTAGE_KEY;
 
 export const StockPage: FunctionComponent<StockPageProps> = (props) => {
-  const [stock, setStock] = useState(props.stock.toString());
+  const [stock, setStock] = useState(props.stock);
   const [isLoaded, setLoaded] = useState(false);
   const [open, setOpen] = useState<any>([]);
   const [close, setClose] = useState<any>([]);
