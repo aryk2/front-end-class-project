@@ -16,7 +16,6 @@ export interface StockTableProps {
   date: string;
 }
 
-const url = "https://www.finnhub.io/api/v1/quote?symbol=";
 export const StockTable: FunctionComponent<StockTableProps> = (props) => {
   return (
     <TableContainer>
