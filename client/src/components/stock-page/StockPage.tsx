@@ -2,7 +2,7 @@ import React, { FunctionComponent, useState, useEffect } from "react";
 import Candlechart from "../candlechart";
 import StockTable from "../stock-table";
 import Container from "@material-ui/core";
-
+const fetch = require("node-fetch");
 // @ts-ignore
 export interface StockPageProps {
   stock: string;
@@ -34,8 +34,8 @@ export const StockPage: FunctionComponent<StockPageProps> = (props) => {
   const dateExp = new RegExp(/[\d]{4}[-][\d]{2}[-][\d]{2}/, "g");
   const getData = async (endpoint: string) => {
     await fetch(endpoint)
-      .then((response) => response.json())
-      .then((jsonResponse) => {
+      .then((response: any) => response.json())
+      .then((jsonResponse: any) => {
         let temp = JSON.stringify(jsonResponse);
         let openTemp = temp.match(openExp);
         let highTemp = temp.match(highExp);

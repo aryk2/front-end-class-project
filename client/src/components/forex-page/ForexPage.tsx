@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
-import { getDefaultNormalizer } from "@testing-library/react";
+const fetch = require("node-fetch");
 // @ts-ignore
 const apiKey = process.env.REACT_APP_FINNHUB_KEY;
 const endpoint =
@@ -30,8 +30,8 @@ export const ForexPage: FunctionComponent<ForexPageProps> = (props) => {
 
   const getData = async () => {
     await fetch(url)
-      .then((response) => response.json())
-      .then((jsonResponse) => {
+      .then((response: any) => response.json())
+      .then((jsonResponse: any) => {
         console.log(jsonResponse);
         setFromCurrencyLong(
           jsonResponse["Realtime Currency Exchange Rate"]["From_Currency Name"]
@@ -46,7 +46,7 @@ export const ForexPage: FunctionComponent<ForexPageProps> = (props) => {
         );
         setLoaded(true);
       })
-      .catch((err) => {
+      .catch((err: any) => {
         console.log(err);
       });
   };

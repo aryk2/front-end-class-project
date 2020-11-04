@@ -45,8 +45,6 @@ export const LaborInformation: FunctionComponent<LaborInformationProps> = (
     await fetch(laborUrl)
       .then((response) => response.json())
       .then((jsonResponse) => {
-        setLoading(true);
-
         setSept2020(jsonResponse.Results.series[0].data[0].value);
         setAug2020(jsonResponse.Results.series[0].data[1].value);
         setJuly2020(jsonResponse.Results.series[0].data[2].value);
@@ -76,6 +74,8 @@ export const LaborInformation: FunctionComponent<LaborInformationProps> = (
         setMarch2018(jsonResponse.Results.series[0].data[30].value);
         setFeb2018(jsonResponse.Results.series[0].data[31].value);
         setJan2018(jsonResponse.Results.series[0].data[32].value);
+
+        setLoading(true);
       })
       .catch((error: any) => {
         console.error(error);
