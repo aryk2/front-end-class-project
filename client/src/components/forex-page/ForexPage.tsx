@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
-import { getDefaultNormalizer } from "@testing-library/react";
+import ForexTable from "../forex-table";
 // @ts-ignore
 const apiKey = process.env.REACT_APP_FINNHUB_KEY;
 const endpoint =
@@ -14,11 +14,11 @@ export const ForexPage: FunctionComponent<ForexPageProps> = (props) => {
   const [fromCurrencyShort, setFromCurrencyShort] = useState(props.from);
   const [toCurrencyShort, setToCurrencyShort] = useState(props.to);
   const [isLoaded, setLoaded] = useState(false);
-  const [fromCurrencyLong, setFromCurrencyLong] = useState(null);
-  const [toCurrencyLong, setToCurrencyLong] = useState(null);
-  const [exchangeRate, setExchangeRate] = useState(null);
-  const [bid, setBid] = useState(null);
-  const [ask, setAsk] = useState(null);
+  const [fromCurrencyLong, setFromCurrencyLong] = useState("");
+  const [toCurrencyLong, setToCurrencyLong] = useState("");
+  const [exchangeRate, setExchangeRate] = useState("");
+  const [bid, setBid] = useState("");
+  const [ask, setAsk] = useState("");
 
   const url =
     endpoint +
@@ -61,7 +61,17 @@ export const ForexPage: FunctionComponent<ForexPageProps> = (props) => {
   }, []);
 
   if (isLoaded === true) {
-    return <h1></h1>;
+    return (
+      <ForexTable
+        toShort={toCurrencyShort}
+        toLong={toCurrencyLong}
+        fromShort={fromCurrencyShort}
+        fromLong={fromCurrencyLong}
+        bid={bid}
+        ask={ask}
+        exchangeRate={exchangeRate}
+      />
+    );
   } else {
     return <h1></h1>;
   }
