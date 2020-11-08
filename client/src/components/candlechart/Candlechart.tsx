@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { Container } from "@material-ui/core";
+import { Container, Box } from "@material-ui/core";
 import Chart from "react-apexcharts";
 // @ts-ignore
 export interface CandlechartProps {
@@ -316,13 +316,17 @@ export const Candlechart: FunctionComponent<CandlechartProps> = (props) => {
   ];
 
   return (
-    <Chart
-      type="candlestick"
-      height="300"
-      width="90%"
-      series={series}
-      options={options}
-    />
+    <Container maxWidth="lg">
+      <Box border={1}>
+        <Chart
+          type="candlestick"
+          height="300"
+          width="100%"
+          series={series}
+          options={options}
+        />
+      </Box>
+    </Container>
   );
 };
 

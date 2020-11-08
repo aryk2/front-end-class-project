@@ -4,6 +4,8 @@ import Table, {
   TableRow,
   TableHead,
   TableCell,
+  Container,
+  Box,
 } from "@material-ui/core";
 // @ts-ignore
 export interface ForexTableProps {
@@ -74,26 +76,30 @@ export const ForexTable: FunctionComponent<ForexTableProps> = (props) => {
 
   if (isLoadedCurrentQuote === true) {
     return (
-      <TableContainer>
-        <h1>
-          {fromCurrencyLong} to {toCurrencyLong}
-        </h1>
-        <TableHead>
-          <TableRow>
-            <TableCell>Bid Price</TableCell>
-            <TableCell>Ask Price</TableCell>
-            <TableCell>Exchange Rate</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableRow>
-          <TableCell>${bid}</TableCell>
-          <TableCell>${ask}</TableCell>
-          <TableCell>
-            1 {fromCurrencyShort} is equivalent to ${exchangeRate}{" "}
-            {toCurrencyShort}
-          </TableCell>
-        </TableRow>
-      </TableContainer>
+      <Container maxWidth="lg">
+        <Box border={1} textAlign="center">
+          <TableContainer>
+            <h1>
+              {fromCurrencyLong} to {toCurrencyLong}
+            </h1>
+            <TableHead>
+              <TableRow>
+                <TableCell>Bid Price</TableCell>
+                <TableCell>Ask Price</TableCell>
+                <TableCell>Exchange Rate</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableRow>
+              <TableCell>${bid}</TableCell>
+              <TableCell>${ask}</TableCell>
+              <TableCell>
+                1 {fromCurrencyShort} is equivalent to ${exchangeRate}{" "}
+                {toCurrencyShort}
+              </TableCell>
+            </TableRow>
+          </TableContainer>
+        </Box>
+      </Container>
     );
   } else {
     return <h1></h1>;
