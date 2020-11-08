@@ -98,7 +98,6 @@ export const StockPage: FunctionComponent<StockPageProps> = (props) => {
           high={high}
           low={low}
           dates={dates}
-          symbol={stock}
         />
         <StockTable
           open={o}
