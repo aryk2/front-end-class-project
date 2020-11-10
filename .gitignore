@@ -1,6 +1,9 @@
 # misc
 .DS_Store
 
+# local env variables 
+.env
+
 # dependencies
 node_modules
 *node_modules/*

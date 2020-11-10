@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
 import ForexTable from "../forex-table";
 import Candlechart from "../candlechart";
+const fetch = require("node-fetch");
 // @ts-ignore
 const apiKey = process.env.REACT_APP_ALPHA_VANTAGE_KEY;
 
@@ -39,6 +40,7 @@ export const ForexPage: FunctionComponent<ForexPageProps> = (props) => {
     toCurrencyShort +
     "&outputsize=compact&apikey=" +
     apiKey;
+
 
   const getCandleInfo = async () => {
     await fetch(candleUrl)
@@ -80,7 +82,7 @@ export const ForexPage: FunctionComponent<ForexPageProps> = (props) => {
         setClose(closeArr);
         setDates(datesTemp);
         setLoadedCandleQuote(true);
-      });
+
   };
 
   useEffect(() => {

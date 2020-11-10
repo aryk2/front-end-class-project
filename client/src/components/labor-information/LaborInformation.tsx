@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
-import UnemploymentChart from "../unemployment-chart";
+import UnemploymentChart from "../unemployment-chart/UnemploymentChart";
 const laborKey = process.env.REACT_APP_BLS_KEY;
 const laborUrl =
   "https://api.bls.gov/publicAPI/v2/timeseries/data/LNS14000000?registrationkey=" +
@@ -45,8 +45,6 @@ export const LaborInformation: FunctionComponent<LaborInformationProps> = (
     await fetch(laborUrl)
       .then((response) => response.json())
       .then((jsonResponse) => {
-        setLoading(true);
-
         setSept2020(jsonResponse.Results.series[0].data[0].value);
         setAug2020(jsonResponse.Results.series[0].data[1].value);
         setJuly2020(jsonResponse.Results.series[0].data[2].value);
@@ -76,6 +74,8 @@ export const LaborInformation: FunctionComponent<LaborInformationProps> = (
         setMarch2018(jsonResponse.Results.series[0].data[30].value);
         setFeb2018(jsonResponse.Results.series[0].data[31].value);
         setJan2018(jsonResponse.Results.series[0].data[32].value);
+
+        setLoading(true);
       })
       .catch((error: any) => {
         console.error(error);

@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 import Chart from "react-apexcharts";
-
+const fetch = require("node-fetch");
 // @ts-ignore
 export interface ExchangeRateChartProps {
   CAD: string | number;
@@ -12,6 +12,10 @@ export interface ExchangeRateChartProps {
 export const ExchangeRateChart: FunctionComponent<ExchangeRateChartProps> = (
   props
 ) => {
+  const CAD = props.CAD;
+  const GBP = props.GBP;
+  const KWD = props.KWD;
+  const EUR = props.EUR;
   const options = {
     chart: {
       height: "50%",
@@ -27,7 +31,7 @@ export const ExchangeRateChart: FunctionComponent<ExchangeRateChartProps> = (
   const series = [
     {
       name: "Amount of currency equal to 1 USD",
-      data: [props.CAD, props.GBP, props.KWD, props.EUR],
+      data: [CAD, GBP, KWD, EUR],
     },
   ];
 

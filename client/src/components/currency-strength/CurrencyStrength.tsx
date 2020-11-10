@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
 import { Container } from "@material-ui/core";
 import ApexCharts from "apexcharts";
-import ExchangeRateChart from "../exchange-rate-chart";
+import ExchangeRateChart from "../exchange-rate-chart/ExchangeRateChart";
 const apiKey = process.env.REACT_APP_FINNHUB_KEY;
 const usdConversionValues =
   "https://finnhub.io/api/v1/forex/rates?base=USD&token=" + apiKey;
