@@ -68,6 +68,11 @@ export const Newsfeed: FunctionComponent<NewsfeedProps> = (props) => {
         justify="center"
         alignItems="center"
       >
+        <Grid item xs={12}>
+          <Box textAlign="center">
+            <h1>Our Top Stories</h1>
+          </Box>
+        </Grid>
         <Grid item xs={4}>
           <Box
             borderTop={1}

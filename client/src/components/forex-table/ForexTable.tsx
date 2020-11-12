@@ -1,12 +1,6 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
-import Table, {
-  TableContainer,
-  TableRow,
-  TableHead,
-  TableCell,
-  Container,
-  Box,
-} from "@material-ui/core";
+import { Box, Grid } from "@material-ui/core";
+import fetch from "node-fetch";
 // @ts-ignore
 export interface ForexTableProps {
   fromCurrencyShort: string;
@@ -76,6 +70,56 @@ export const ForexTable: FunctionComponent<ForexTableProps> = (props) => {
 
   if (isLoadedCurrentQuote === true) {
     return (
+      <Grid
+        container
+        spacing={0}
+        direction="row"
+        justify="center"
+        alignItems="center"
+        style={{ backgroundColor: "#212121" }}
+      >
+        <Grid item xs={12}>
+          <Box borderBottom={1} textAlign="center" style={{ color: "#26c6da" }}>
+            <h1>
+              {fromCurrencyLong} to {toCurrencyLong}
+            </h1>
+          </Box>
+        </Grid>
+        <Grid item xs={4} style={{ color: "#26c6da" }}>
+          <Box textAlign="center">
+            <h2>Bid Price</h2>
+          </Box>
+        </Grid>
+        <Grid item xs={4} style={{ color: "#26c6da" }}>
+          <Box textAlign="center">
+            <h2>Ask Price</h2>
+          </Box>
+        </Grid>
+        <Grid item xs={4} style={{ color: "#26c6da" }}>
+          <Box textAlign="center">
+            <h2>Exchange Rate</h2>
+          </Box>
+        </Grid>
+        <Grid item xs={4} style={{ color: "#26c6da" }}>
+          <Box textAlign="center">
+            <h2>${bid}</h2>
+          </Box>
+        </Grid>
+        <Grid item xs={4} style={{ color: "#26c6da" }}>
+          <Box textAlign="center">
+            <h2>${ask}</h2>
+          </Box>
+        </Grid>
+        <Grid item xs={4} style={{ color: "#26c6da" }}>
+          <Box textAlign="center">
+            <h2>
+              1 {fromCurrencyShort} is equivalent to ${exchangeRate}{" "}
+              {toCurrencyShort}
+            </h2>
+          </Box>
+        </Grid>
+      </Grid>
+      /*
       <Container maxWidth="lg">
         <Box border={1} textAlign="center">
           <TableContainer>
@@ -100,6 +144,7 @@ export const ForexTable: FunctionComponent<ForexTableProps> = (props) => {
           </TableContainer>
         </Box>
       </Container>
+      */
     );
   } else {
     return <h1></h1>;

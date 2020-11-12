@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
 import ForexTable from "../forex-table";
 import Candlechart from "../candlechart";
+import { Container, Box } from "@material-ui/core";
 const fetch = require("node-fetch");
 // @ts-ignore
 const apiKey = process.env.REACT_APP_ALPHA_VANTAGE_KEY;
@@ -41,11 +42,10 @@ export const ForexPage: FunctionComponent<ForexPageProps> = (props) => {
     "&outputsize=compact&apikey=" +
     apiKey;
 
-
   const getCandleInfo = async () => {
     await fetch(candleUrl)
-      .then((response) => response.json())
-      .then((jsonResponse) => {
+      .then((response: any) => response.json())
+      .then((jsonResponse: any) => {
         let temp = JSON.stringify(jsonResponse);
         let openTemp = temp.match(openExp);
         let highTemp = temp.match(highExp);
@@ -82,7 +82,7 @@ export const ForexPage: FunctionComponent<ForexPageProps> = (props) => {
         setClose(closeArr);
         setDates(datesTemp);
         setLoadedCandleQuote(true);
-
+      });
   };
 
   useEffect(() => {
@@ -91,19 +91,21 @@ export const ForexPage: FunctionComponent<ForexPageProps> = (props) => {
 
   if (isLoadedCandleQuote === true) {
     return (
-      <div>
-        <Candlechart
-          open={open}
-          close={close}
-          low={low}
-          high={high}
-          dates={dates}
-        />
-        <ForexTable
-          toCurrencyShort={toCurrencyShort}
-          fromCurrencyShort={fromCurrencyShort}
-        />
-      </div>
+      <Container>
+        <Box marginTop={2}>
+          <Candlechart
+            open={open}
+            close={close}
+            low={low}
+            high={high}
+            dates={dates}
+          />
+          <ForexTable
+            toCurrencyShort={toCurrencyShort}
+            fromCurrencyShort={fromCurrencyShort}
+          />
+        </Box>
+      </Container>
     );
   } else {
     return <h1></h1>;
