@@ -66,7 +66,7 @@ export const NewsPage: FunctionComponent<NewsPageProps> = (props) => {
         <Grid
           container
           spacing={1}
-          direction="row"
+          direction="column"
           justify="center"
           alignItems="center"
         >

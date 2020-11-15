@@ -1,13 +1,27 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
-import { Grid, Button, Box, Link } from "@material-ui/core";
+import {
+  Grid,
+  Button,
+  Box,
+  Link,
+  makeStyles,
+  Container,
+} from "@material-ui/core";
 const apiKey = process.env.REACT_APP_FINNHUB_KEY;
 const newsCall =
   "https://finnhub.io/api/v1/news?category=general&token=" + apiKey;
 // @ts-ignore
-
+const useStyles = makeStyles({
+  root: {
+    backgroundColor: "#212121",
+    color: "#00bcd4",
+  },
+});
 export interface NewsfeedProps {}
 
 export const Newsfeed: FunctionComponent<NewsfeedProps> = (props) => {
+  const classes = useStyles();
+
   const [isLoaded, setLoaded] = useState(false);
   const [newsSource1, setSource1] = useState("");
   const [headline1, setHeadline1] = useState("");
@@ -61,67 +75,90 @@ export const Newsfeed: FunctionComponent<NewsfeedProps> = (props) => {
 
   if (isLoaded === true) {
     return (
-      <Grid
-        container
-        spacing={1}
-        direction="column"
-        justify="center"
-        alignItems="center"
-      >
-        <Grid item xs={12}>
-          <Box textAlign="center">
-            <h1>Our Top Stories</h1>
-          </Box>
-        </Grid>
-        <Grid item xs={4}>
-          <Box
-            borderTop={1}
-            borderBottom={1}
-            textAlign="left"
-            fontSize={12}
-            pl={1}
-          >
-            {newsSource1}
-            <br />
-            <Link href="#" onClick={() => handleRedirect(link1)}>
-              {headline1}
-            </Link>
-          </Box>
-        </Grid>
-        <Grid item xs={4}>
-          <Box borderBottom={1} textAlign="left" fontSize={12} pl={1}>
-            {newsSource2}
-            <br />
-            <Link href="#" onClick={() => handleRedirect(link2)}>
-              {headline2}
-            </Link>
-          </Box>
-        </Grid>
-        <Grid item xs={4}>
-          <Box borderBottom={1} textAlign="left" fontSize={12} pl={1}>
-            {newsSource3}
-            <br />
-            <Link
-              href="#"
-              color="primary"
-              onClick={() => handleRedirect(link3)}
+      <Container maxWidth="md">
+        <Grid
+          container
+          spacing={1}
+          direction="column"
+          justify="center"
+          alignItems="center"
+          className={classes.root}
+        >
+          <Grid item xs={4}>
+            <Box textAlign="center">
+              <h1>Our Top Stories</h1>
+            </Box>
+          </Grid>
+          <Grid item xs={4}>
+            <Box
+              borderTop={1}
+              borderBottom={1}
+              textAlign="left"
+              fontSize={12}
+              pl={1}
             >
-              {headline3}
-            </Link>
-          </Box>
-        </Grid>
-        <Grid item xs={4}>
-          <Box textAlign="center" fontSize={16}>
-            <Link
-              href="#"
-              color="primary"
-              onClick={() => handleRedirect(link3)}
+              {newsSource1}
+              <br />
+              <Link
+                href="#"
+                onClick={() => handleRedirect(link1)}
+                color="inherit"
+              >
+                {headline1}
+              </Link>
+            </Box>
+          </Grid>
+          <Grid item xs={4}>
+            <Box
+              borderBottom={1}
+              textAlign="left"
+              fontSize={12}
+              pl={1}
+              justifyContent="left"
             >
-              Click here to see more top stories
-            </Link>
-          </Box>
+              {newsSource2}
+              <br />
+              <Link
+                href="#"
+                onClick={() => handleRedirect(link2)}
+                color="inherit"
+              >
+                {headline2}
+              </Link>
+            </Box>
+          </Grid>
+          <Grid item xs={4}>
+            <Box
+              borderBottom={1}
+              textAlign="left"
+              fontSize={12}
+              pl={1}
+              maxWidth="100"
+            >
+              {newsSource3}
+              <br />
+              <Link
+                href="#"
+                color="inherit"
+                onClick={() => handleRedirect(link3)}
+              >
+                {headline3}
+              </Link>
+            </Box>
+          </Grid>
+          <Grid item xs={4}>
+            <Box textAlign="center" fontSize={16}>
+              <Link
+                href="#"
+                color="inherit"
+                onClick={() => handleRedirect(link3)}
+              >
+                Click here to see more top stories
+              </Link>
+            </Box>
+          </Grid>
         </Grid>
-      </Grid>
+      </Container>
     );
   } else {
     return <h1></h1>;
