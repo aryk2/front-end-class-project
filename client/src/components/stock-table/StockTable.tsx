@@ -4,6 +4,8 @@ import Table, {
   TableRow,
   TableHead,
   TableCell,
+  Grid,
+  Box,
 } from "@material-ui/core";
 // @ts-ignore
 export interface StockTableProps {
@@ -18,26 +20,60 @@ export interface StockTableProps {
 
 export const StockTable: FunctionComponent<StockTableProps> = (props) => {
   return (
-    <TableContainer>
-      <h1>{props.stockName}</h1>
-      <h2>Last Updated: {props.date}</h2>
-      <TableHead>
-        <TableRow>
-          <TableCell>Current Price</TableCell>
-          <TableCell>Open Price</TableCell>
-          <TableCell>High</TableCell>
-          <TableCell>Low</TableCell>
-          <TableCell>Previous Close</TableCell>
-        </TableRow>
-      </TableHead>
-      <TableRow>
-        <TableCell>${props.current}</TableCell>
-        <TableCell>${props.open}</TableCell>
-        <TableCell>${props.high}</TableCell>
-        <TableCell>${props.low}</TableCell>
-        <TableCell>${props.previousClose}</TableCell>
-      </TableRow>
-    </TableContainer>
+    <Grid
+      container
+      direction="row"
+      justify="center"
+      alignItems="center"
+      style={{ backgroundColor: "#212121" }}
+    >
+      <Grid item xs={12}>
+        <Box borderBottom={1} textAlign="center" style={{ color: "#26c6da" }}>
+          <h1>{props.stockName}</h1>
+          <h2>Last Updated: {props.date}</h2>
+        </Box>
+      </Grid>
+      <Grid item xs={3}>
+        <Box textAlign="center" style={{ color: "#26c6da" }}>
+          <h3>Current Price</h3>
+        </Box>
+      </Grid>
+      <Grid item xs={3}>
+        <Box textAlign="center" style={{ color: "#26c6da" }}>
+          <h3>Open Price</h3>
+        </Box>
+      </Grid>
+      <Grid item xs={3}>
+        <Box textAlign="center" style={{ color: "#26c6da" }}>
+          <h3>High</h3>
+        </Box>
+      </Grid>
+      <Grid item xs={3}>
+        <Box textAlign="center" style={{ color: "#26c6da" }}>
+          <h3>Low</h3>
+        </Box>
+      </Grid>
+      <Grid item xs={3}>
+        <Box textAlign="center" style={{ color: "#26c6da" }}>
+          <h3>${props.current}</h3>
+        </Box>
+      </Grid>
+      <Grid item xs={3}>
+        <Box textAlign="center" style={{ color: "#26c6da" }}>
+          <h3>${props.open}</h3>
+        </Box>
+      </Grid>
+      <Grid item xs={3}>
+        <Box textAlign="center" style={{ color: "#26c6da" }}>
+          <h3>${props.high}</h3>
+        </Box>
+      </Grid>
+      <Grid item xs={3}>
+        <Box textAlign="center" style={{ color: "#26c6da" }}>
+          <h3>${props.low}</h3>
+        </Box>
+      </Grid>
+    </Grid>
   );
 };
 

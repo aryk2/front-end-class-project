@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
 import ForexTable from "../forex-table";
 import Candlechart from "../candlechart";
+import { Container, Box } from "@material-ui/core";
 const fetch = require("node-fetch");
 // @ts-ignore
 const apiKey = process.env.REACT_APP_ALPHA_VANTAGE_KEY;
@@ -8,14 +9,15 @@ const apiKey = process.env.REACT_APP_ALPHA_VANTAGE_KEY;
 const candleEndpoint =
   "https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=";
 
-export interface ForexPageProps {
-  from: string;
-  to: string;
-}
+export interface ForexPageProps {}
 
 export const ForexPage: FunctionComponent<ForexPageProps> = (props) => {
-  const [fromCurrencyShort, setFromCurrencyShort] = useState(props.from);
-  const [toCurrencyShort, setToCurrencyShort] = useState(props.to);
+  const [fromCurrencyShort, setFromCurrencyShort] = useState(
+    window.localStorage.getItem("fromCurrency")
+  );
+  const [toCurrencyShort, setToCurrencyShort] = useState(
+    window.localStorage.getItem("toCurrency")
+  );
 
   const [isLoadedCandleQuote, setLoadedCandleQuote] = useState(false);
 
@@ -41,11 +43,10 @@ export const ForexPage: FunctionComponent<ForexPageProps> = (props) => {
     "&outputsize=compact&apikey=" +
     apiKey;
 
-
   const getCandleInfo = async () => {
     await fetch(candleUrl)
-      .then((response) => response.json())
-      .then((jsonResponse) => {
+      .then((response: any) => response.json())
+      .then((jsonResponse: any) => {
         let temp = JSON.stringify(jsonResponse);
         let openTemp = temp.match(openExp);
         let highTemp = temp.match(highExp);
@@ -82,7 +83,7 @@ export const ForexPage: FunctionComponent<ForexPageProps> = (props) => {
         setClose(closeArr);
         setDates(datesTemp);
         setLoadedCandleQuote(true);
-
+      });
   };
 
   useEffect(() => {
@@ -91,19 +92,21 @@ export const ForexPage: FunctionComponent<ForexPageProps> = (props) => {
 
   if (isLoadedCandleQuote === true) {
     return (
-      <div>
-        <Candlechart
-          open={open}
-          close={close}
-          low={low}
-          high={high}
-          dates={dates}
-        />
-        <ForexTable
-          toCurrencyShort={toCurrencyShort}
-          fromCurrencyShort={fromCurrencyShort}
-        />
-      </div>
+      <Container>
+        <Box marginTop={2}>
+          <Candlechart
+            open={open}
+            close={close}
+            low={low}
+            high={high}
+            dates={dates}
+          />
+          <ForexTable
+            toCurrencyShort={toCurrencyShort!}
+            fromCurrencyShort={fromCurrencyShort!}
+          />
+        </Box>
+      </Container>
     );
   } else {
     return <h1></h1>;

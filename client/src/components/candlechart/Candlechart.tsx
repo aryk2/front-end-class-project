@@ -19,18 +19,102 @@ export const Candlechart: FunctionComponent<CandlechartProps> = (props) => {
       type: "candlestick",
     },
     title: {
-      text: "30 days of trading data",
+      text: "Three months of trading data",
       align: "left",
     },
 
     xaxis: {
       type: "category",
     },
+
+    fill: {
+      colors: "#212121",
+    },
   };
 
   const series = [
     {
       data: [
+        {
+          x: props.dates[89],
+          y: [props.open[89], props.high[89], props.low[89], props.close[89]],
+        },
+        {
+          x: props.dates[88],
+          y: [props.open[88], props.high[88], props.low[88], props.close[88]],
+        },
+        {
+          x: props.dates[87],
+          y: [props.open[87], props.high[87], props.low[87], props.close[87]],
+        },
+        {
+          x: props.dates[86],
+          y: [props.open[86], props.high[86], props.low[86], props.close[86]],
+        },
+        {
+          x: props.dates[85],
+          y: [props.open[85], props.high[85], props.low[85], props.close[85]],
+        },
+        {
+          x: props.dates[84],
+          y: [props.open[84], props.high[84], props.low[84], props.close[84]],
+        },
+        {
+          x: props.dates[83],
+          y: [props.open[83], props.high[83], props.low[83], props.close[83]],
+        },
+        {
+          x: props.dates[82],
+          y: [props.open[82], props.high[82], props.low[82], props.close[82]],
+        },
+        {
+          x: props.dates[81],
+          y: [props.open[81], props.high[81], props.low[81], props.close[81]],
+        },
+        {
+          x: props.dates[80],
+          y: [props.open[80], props.high[80], props.low[80], props.close[80]],
+        },
+        {
+          x: props.dates[79],
+          y: [props.open[79], props.high[79], props.low[79], props.close[79]],
+        },
+        {
+          x: props.dates[78],
+          y: [props.open[78], props.high[78], props.low[78], props.close[78]],
+        },
+        {
+          x: props.dates[77],
+          y: [props.open[77], props.high[77], props.low[77], props.close[77]],
+        },
+        {
+          x: props.dates[76],
+          y: [props.open[76], props.high[76], props.low[76], props.close[76]],
+        },
+        {
+          x: props.dates[75],
+          y: [props.open[75], props.high[75], props.low[75], props.close[75]],
+        },
+        {
+          x: props.dates[74],
+          y: [props.open[74], props.high[74], props.low[74], props.close[74]],
+        },
+        {
+          x: props.dates[73],
+          y: [props.open[73], props.high[73], props.low[73], props.close[73]],
+        },
+        {
+          x: props.dates[72],
+          y: [props.open[72], props.high[72], props.low[72], props.close[72]],
+        },
+        {
+          x: props.dates[71],
+          y: [props.open[71], props.high[71], props.low[71], props.close[71]],
+        },
+        {
+          x: props.dates[70],
+          y: [props.open[70], props.high[70], props.low[70], props.close[70]],
+        },
         {
           x: props.dates[69],
           y: [props.open[69], props.high[69], props.low[69], props.close[69]],
