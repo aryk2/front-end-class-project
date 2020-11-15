@@ -2,16 +2,15 @@ import React, { FunctionComponent, useState, useEffect } from "react";
 import Candlechart from "../candlechart";
 import StockTable from "../stock-table";
 import Container from "@material-ui/core";
+import SearchBar from "../search-bar";
 const fetch = require("node-fetch");
 // @ts-ignore
-export interface StockPageProps {
-  stock: string;
-}
+export interface StockPageProps {}
 
 const apiKey = process.env.REACT_APP_ALPHA_VANTAGE_KEY;
 
 export const StockPage: FunctionComponent<StockPageProps> = (props) => {
-  const [stock, setStock] = useState(props.stock);
+  const [stock, setStock] = useState(window.localStorage.getItem("stock"));
   const [isLoaded, setLoaded] = useState(false);
   const [open, setOpen] = useState<any>([]);
   const [close, setClose] = useState<any>([]);
@@ -104,7 +103,7 @@ export const StockPage: FunctionComponent<StockPageProps> = (props) => {
           high={h}
           low={l}
           previousClose={c}
-          stockName={stock}
+          stockName={stock!}
           date={d}
           current={o}
         />
