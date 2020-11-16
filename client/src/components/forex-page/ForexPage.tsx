@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
-import ForexTable from "../forex-table";
-import Candlechart from "../candlechart";
+import ForexTable from "../forex-table/ForexTable";
+import Candlechart from "../candlechart/Candlechart";
 import { Container, Box } from "@material-ui/core";
 const fetch = require("node-fetch");
 // @ts-ignore

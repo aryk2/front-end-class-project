@@ -3,8 +3,8 @@ import { TextField, Container, AppBar, Box, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { Redirect } from "react-router-dom";
-import StockPage from "../stock-page";
-import ForexPage from "../forex-page";
+import StockPage from "../stock-page/StockPage";
+import ForexPage from "../forex-page/ForexPage";
 // @ts-ignore
 export interface SearchBarProps {}
 

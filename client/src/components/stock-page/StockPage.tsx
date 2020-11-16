@@ -1,8 +1,8 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
-import Candlechart from "../candlechart";
-import StockTable from "../stock-table";
+import Candlechart from "../candlechart/Candlechart";
+import StockTable from "../stock-table/StockTable";
 import Container from "@material-ui/core";
-import SearchBar from "../search-bar";
+import SearchBar from "../search-bar/SearchBar";
 const fetch = require("node-fetch");
 // @ts-ignore
 export interface StockPageProps {}
