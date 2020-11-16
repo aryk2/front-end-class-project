@@ -1,8 +1,8 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
 import Candlechart from "../candlechart";
 import StockTable from "../stock-table";
-import Container from "@material-ui/core";
-import SearchBar from "../search-bar";
+import { Container, Box } from "@material-ui/core";
+
 const fetch = require("node-fetch");
 // @ts-ignore
 export interface StockPageProps {}
@@ -17,7 +17,7 @@ export const StockPage: FunctionComponent<StockPageProps> = (props) => {
   const [high, setHigh] = useState<any>([]);
   const [low, setLow] = useState<any>([]);
   const [dates, setDates] = useState<any>([]);
-
+  const [error, setError] = useState(false);
   const endpoint =
     "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" +
     stock +
@@ -68,8 +68,9 @@ export const StockPage: FunctionComponent<StockPageProps> = (props) => {
         setDates(datesTemp);
         setLoaded(true);
       })
-      .catch((error: any) => {
-        console.error(error);
+      .catch((err: any) => {
+        console.error(err);
+        setError(true);
       });
   };
 
@@ -109,8 +110,24 @@ export const StockPage: FunctionComponent<StockPageProps> = (props) => {
         />
       </div>
     );
+  } else if (error === true) {
+    return (
+      <Container maxWidth="lg">
+        <Box textAlign="center">
+          <h1>It seems as though we can't find results for your search</h1>
+          <br />
+          <h1>Please check your search query or try again later</h1>
+        </Box>
+      </Container>
+    );
   } else {
-    return <h1>Nope</h1>;
+    return (
+      <Container maxWidth="lg">
+        <Box textAlign="center">
+          <h1>Loading your results!</h1>
+        </Box>
+      </Container>
+    );
   }
 };
 /*

@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
 import ForexTable from "../forex-table";
 import Candlechart from "../candlechart";
-import SearchBar from "../search-bar";
+import { Container, Box } from "@material-ui/core";
 const fetch = require("node-fetch");
 // @ts-ignore
 const apiKey = process.env.REACT_APP_ALPHA_VANTAGE_KEY;
@@ -20,7 +20,7 @@ export const ForexPage: FunctionComponent<ForexPageProps> = (props) => {
   );
 
   const [isLoadedCandleQuote, setLoadedCandleQuote] = useState(false);
-
+  const [error, setError] = useState(false);
   const [dates, setDates] = useState<any>([]);
 
   const [open, setOpen] = useState<any>([]);
@@ -83,6 +83,10 @@ export const ForexPage: FunctionComponent<ForexPageProps> = (props) => {
         setClose(closeArr);
         setDates(datesTemp);
         setLoadedCandleQuote(true);
+      })
+      .catch((err: any) => {
+        console.log(err);
+        setError(true);
       });
   };
 
@@ -106,8 +110,24 @@ export const ForexPage: FunctionComponent<ForexPageProps> = (props) => {
         />
       </div>
     );
+  } else if (error === true) {
+    return (
+      <Container maxWidth="lg">
+        <Box textAlign="center">
+          <h1>We cannot find what you are searching for!</h1>
+          <br />
+          <h1>Please check your search inputs or try again later!</h1>
+        </Box>
+      </Container>
+    );
   } else {
-    return <h1></h1>;
+    return (
+      <Container maxWidth="lg">
+        <Box textAlign="center">
+          <h1>Loading...</h1>
+        </Box>
+      </Container>
+    );
   }
 };
 
