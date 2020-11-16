@@ -7,6 +7,8 @@ import {
   makeStyles,
   Container,
 } from "@material-ui/core";
+
+import { Link as RLink } from "react-router-dom";
 const apiKey = process.env.REACT_APP_FINNHUB_KEY;
 const newsCall =
   "https://finnhub.io/api/v1/news?category=general&token=" + apiKey;
@@ -148,13 +150,11 @@ export const Newsfeed: FunctionComponent<NewsfeedProps> = (props) => {
           </Grid>
           <Grid item xs={4}>
             <Box textAlign="center" fontSize={16}>
-              <Link
-                href="#"
-                color="inherit"
-                onClick={() => handleRedirect(link3)}
-              >
-                Click here to see more top stories
-              </Link>
+              <RLink to="/NewsPage">
+                <Link href="#" color="inherit">
+                  Click here to see more top stories
+                </Link>
+              </RLink>
             </Box>
           </Grid>
         </Grid>
