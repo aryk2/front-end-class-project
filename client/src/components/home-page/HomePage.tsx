@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import Newsfeed from "../newsfeed";
+import Newsfeed from "../newsfeed/Newsfeed";
 import { Container } from "@material-ui/core";
 
 // @ts-ignore
