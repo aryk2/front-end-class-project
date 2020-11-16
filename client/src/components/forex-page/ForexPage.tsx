@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
 import ForexTable from "../forex-table";
 import Candlechart from "../candlechart";
-import { Container, Box } from "@material-ui/core";
+import SearchBar from "../search-bar";
 const fetch = require("node-fetch");
 // @ts-ignore
 const apiKey = process.env.REACT_APP_ALPHA_VANTAGE_KEY;
@@ -92,21 +92,19 @@ export const ForexPage: FunctionComponent<ForexPageProps> = (props) => {
 
   if (isLoadedCandleQuote === true) {
     return (
-      <Container>
-        <Box marginTop={2}>
-          <Candlechart
-            open={open}
-            close={close}
-            low={low}
-            high={high}
-            dates={dates}
-          />
-          <ForexTable
-            toCurrencyShort={toCurrencyShort!}
-            fromCurrencyShort={fromCurrencyShort!}
-          />
-        </Box>
-      </Container>
+      <div>
+        <Candlechart
+          open={open}
+          close={close}
+          low={low}
+          high={high}
+          dates={dates}
+        />
+        <ForexTable
+          toCurrencyShort={toCurrencyShort!}
+          fromCurrencyShort={fromCurrencyShort!}
+        />
+      </div>
     );
   } else {
     return <h1></h1>;
