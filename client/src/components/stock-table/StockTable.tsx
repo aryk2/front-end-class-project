@@ -1,12 +1,5 @@
 import React, { FunctionComponent } from "react";
-import Table, {
-  TableContainer,
-  TableRow,
-  TableHead,
-  TableCell,
-  Grid,
-  Box,
-} from "@material-ui/core";
+import Table, { Button, Grid, Box } from "@material-ui/core";
 // @ts-ignore
 export interface StockTableProps {
   open: string;
@@ -30,7 +23,19 @@ export const StockTable: FunctionComponent<StockTableProps> = (props) => {
       <Grid item xs={12}>
         <Box borderBottom={1} textAlign="center" style={{ color: "#26c6da" }}>
           <h1>{props.stockName}</h1>
-          <h2>Last Updated: {props.date}</h2>
+          <h2>
+            Last Updated: {props.date}
+            <span>
+              <Button
+                size="small"
+                variant="contained"
+                color="primary"
+                style={{ marginLeft: "3px" }}
+              >
+                Add to Favs
+              </Button>{" "}
+            </span>
+          </h2>
         </Box>
       </Grid>
       <Grid item xs={3}>

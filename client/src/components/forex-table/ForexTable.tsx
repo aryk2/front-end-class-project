@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
-import { Box, Grid } from "@material-ui/core";
+import { Box, Grid, Button } from "@material-ui/core";
 import fetch from "node-fetch";
 // @ts-ignore
 export interface ForexTableProps {
@@ -82,6 +82,16 @@ export const ForexTable: FunctionComponent<ForexTableProps> = (props) => {
           <Box borderBottom={1} textAlign="center" style={{ color: "#26c6da" }}>
             <h1>
               {fromCurrencyLong} to {toCurrencyLong}
+              <span>
+                <Button
+                  size="small"
+                  variant="contained"
+                  color="primary"
+                  style={{ marginLeft: "3px" }}
+                >
+                  Add to Favs
+                </Button>
+              </span>
             </h1>
           </Box>
         </Grid>
@@ -119,32 +129,6 @@ export const ForexTable: FunctionComponent<ForexTableProps> = (props) => {
           </Box>
         </Grid>
       </Grid>
-      /*
-      <Container maxWidth="lg">
-        <Box border={1} textAlign="center">
-          <TableContainer>
-            <h1>
-              {fromCurrencyLong} to {toCurrencyLong}
-            </h1>
-            <TableHead>
-              <TableRow>
-                <TableCell>Bid Price</TableCell>
-                <TableCell>Ask Price</TableCell>
-                <TableCell>Exchange Rate</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableRow>
-              <TableCell>${bid}</TableCell>
-              <TableCell>${ask}</TableCell>
-              <TableCell>
-                1 {fromCurrencyShort} is equivalent to ${exchangeRate}{" "}
-                {toCurrencyShort}
-              </TableCell>
-            </TableRow>
-          </TableContainer>
-        </Box>
-      </Container>
-      */
     );
   } else {
     return <h1></h1>;

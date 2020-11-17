@@ -2,6 +2,7 @@ import React, { FunctionComponent, useState, useEffect } from "react";
 import ForexTable from "../forex-table";
 import Candlechart from "../candlechart";
 import { Container, Box } from "@material-ui/core";
+import SearchBar from "../search-bar";
 const fetch = require("node-fetch");
 // @ts-ignore
 const apiKey = process.env.REACT_APP_ALPHA_VANTAGE_KEY;
