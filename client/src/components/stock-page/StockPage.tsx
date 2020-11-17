@@ -2,6 +2,7 @@ import React, { FunctionComponent, useState, useEffect } from "react";
 import Candlechart from "../candlechart";
 import StockTable from "../stock-table";
 import { Container, Box } from "@material-ui/core";
+import SearchBar from "../search-bar";
 
 const fetch = require("node-fetch");
 // @ts-ignore
