@@ -3,6 +3,7 @@ import ForexTable from "../forex-table";
 import Candlechart from "../candlechart";
 import { Container, Box } from "@material-ui/core";
 import SearchBar from "../search-bar";
+import { useParams } from "react-router-dom";
 const fetch = require("node-fetch");
 // @ts-ignore
 const apiKey = process.env.REACT_APP_ALPHA_VANTAGE_KEY;
@@ -13,15 +14,11 @@ const candleEndpoint =
 export interface ForexPageProps {}
 
 export const ForexPage: FunctionComponent<ForexPageProps> = (props) => {
-  const [fromCurrencyShort, setFromCurrencyShort] = useState(
-    window.localStorage.getItem("fromCurrency")
-  );
-  const [toCurrencyShort, setToCurrencyShort] = useState(
-    window.localStorage.getItem("toCurrency")
-  );
+  const { fromCurrency, toCurrency } = useParams();
 
-  const [isLoadedCandleQuote, setLoadedCandleQuote] = useState(false);
-  const [error, setError] = useState(false);
+  const [isLoadedCandleQuote, setLoadedCandleQuote] = useState<null | true>(
+    null
+  );
   const [dates, setDates] = useState<any>([]);
 
   const [open, setOpen] = useState<any>([]);
@@ -38,98 +35,87 @@ export const ForexPage: FunctionComponent<ForexPageProps> = (props) => {
 
   const candleUrl =
     candleEndpoint +
-    fromCurrencyShort +
+    fromCurrency +
     "&to_symbol=" +
-    toCurrencyShort +
+    toCurrency +
     "&outputsize=compact&apikey=" +
     apiKey;
 
-  const getCandleInfo = async () => {
-    await fetch(candleUrl)
-      .then((response: any) => response.json())
-      .then((jsonResponse: any) => {
-        let temp = JSON.stringify(jsonResponse);
-        let openTemp = temp.match(openExp);
-        let highTemp = temp.match(highExp);
-        let lowTemp = temp.match(lowExp);
-        let closeTemp = temp.match(closeExp);
-        let datesTemp = temp.match(dateExp);
-
-        let openArr;
-        for (let i = 1; i < openTemp!.length; ++i) {
-          openTemp![0] += openTemp![i];
-        }
-        openArr = openTemp![0].match(numExp);
-
-        let highArr;
-        for (let i = 1; i < highTemp!.length; ++i) {
-          highTemp![0] += highTemp![i];
-        }
-        highArr = highTemp![0].match(numExp);
-
-        let lowArr;
-        for (let i = 1; i < lowTemp!.length; ++i) {
-          lowTemp![0] += lowTemp![i];
-        }
-        lowArr = lowTemp![0].match(numExp);
-
-        let closeArr;
-        for (let i = 1; i < closeTemp!.length; ++i) {
-          closeTemp![0] += closeTemp![i];
-        }
-        closeArr = closeTemp![0].match(numExp);
-        setHigh(highArr);
-        setLow(lowArr);
-        setOpen(openArr);
-        setClose(closeArr);
-        setDates(datesTemp);
-        setLoadedCandleQuote(true);
-      })
-      .catch((err: any) => {
-        console.log(err);
-        setError(true);
-      });
-  };
-
   useEffect(() => {
-    getCandleInfo();
-  }, []);
+    const getCandleInfo = async () => {
+      await fetch(candleUrl)
+        .then((response: any) => response.json())
+        .then((jsonResponse: any) => {
+          let temp = JSON.stringify(jsonResponse);
+          let openTemp = temp.match(openExp);
+          let highTemp = temp.match(highExp);
+          let lowTemp = temp.match(lowExp);
+          let closeTemp = temp.match(closeExp);
+          let datesTemp = temp.match(dateExp);
 
-  if (isLoadedCandleQuote === true) {
-    return (
-      <div>
-        <Candlechart
-          open={open}
-          close={close}
-          low={low}
-          high={high}
-          dates={dates}
-        />
-        <ForexTable
-          toCurrencyShort={toCurrencyShort!}
-          fromCurrencyShort={fromCurrencyShort!}
-        />
-      </div>
-    );
-  } else if (error === true) {
-    return (
-      <Container maxWidth="lg">
-        <Box textAlign="center">
-          <h1>We cannot find what you are searching for!</h1>
-          <br />
-          <h1>Please check your search inputs or try again later!</h1>
-        </Box>
-      </Container>
-    );
-  } else {
-    return (
-      <Container maxWidth="lg">
-        <Box textAlign="center">
-          <h1>Loading...</h1>
-        </Box>
-      </Container>
-    );
-  }
+          let openArr;
+          for (let i = 1; i < openTemp!.length; ++i) {
+            openTemp![0] += openTemp![i];
+          }
+          openArr = openTemp![0].match(numExp);
+
+          let highArr;
+          for (let i = 1; i < highTemp!.length; ++i) {
+            highTemp![0] += highTemp![i];
+          }
+          highArr = highTemp![0].match(numExp);
+
+          let lowArr;
+          for (let i = 1; i < lowTemp!.length; ++i) {
+            lowTemp![0] += lowTemp![i];
+          }
+          lowArr = lowTemp![0].match(numExp);
+
+          let closeArr;
+          for (let i = 1; i < closeTemp!.length; ++i) {
+            closeTemp![0] += closeTemp![i];
+          }
+          closeArr = closeTemp![0].match(numExp);
+          setHigh(highArr);
+          setLow(lowArr);
+          setOpen(openArr);
+          setClose(closeArr);
+          setDates(datesTemp);
+          setLoadedCandleQuote(true);
+        })
+        .catch((err: any) => {
+          console.log(err);
+        });
+    };
+    if (isLoadedCandleQuote === true) {
+      setLoadedCandleQuote(null);
+      getCandleInfo();
+    } else {
+      getCandleInfo();
+    }
+  }, [candleUrl]);
+
+  return isLoadedCandleQuote ? (
+    <div>
+      <Candlechart
+        open={open}
+        close={close}
+        low={low}
+        high={high}
+        dates={dates}
+      />
+      <ForexTable
+        toCurrencyShort={toCurrency}
+        fromCurrencyShort={fromCurrency}
+      />
+    </div>
+  ) : (
+    <Container maxWidth="lg">
+      <Box justifyContent="Center" alignContent="center">
+        Loading...
+      </Box>
+    </Container>
+  );
 };
 
 export default ForexPage;

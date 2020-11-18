@@ -18,8 +18,10 @@ const useStyles = makeStyles({
   root: {
     backgroundColor: "#212121",
     color: "#00bcd4",
+    "& .MuiTypography-colorPrimary": { color: "#4dd0e1" },
   },
 });
+
 export interface NewsfeedProps {}
 
 export const Newsfeed: FunctionComponent<NewsfeedProps> = (props) => {
@@ -78,7 +80,7 @@ export const Newsfeed: FunctionComponent<NewsfeedProps> = (props) => {
 
   if (isLoaded === true) {
     return (
-      <Container maxWidth="md">
+      <Container maxWidth="sm">
         <Grid
           container
           spacing={1}
@@ -87,12 +89,12 @@ export const Newsfeed: FunctionComponent<NewsfeedProps> = (props) => {
           alignItems="center"
           className={classes.root}
         >
-          <Grid item xs={4}>
-            <Box textAlign="center">
+          <Grid item xs={6}>
+            <Box textAlign="center" color="#ffff00">
               <h1>Our Top Stories</h1>
             </Box>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={6}>
             <Box
               borderTop={1}
               borderBottom={1}
@@ -111,7 +113,7 @@ export const Newsfeed: FunctionComponent<NewsfeedProps> = (props) => {
               </Link>
             </Box>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={6}>
             <Box
               borderBottom={1}
               textAlign="left"
@@ -130,7 +132,7 @@ export const Newsfeed: FunctionComponent<NewsfeedProps> = (props) => {
               </Link>
             </Box>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={6}>
             <Box
               borderBottom={1}
               textAlign="left"
@@ -149,10 +151,10 @@ export const Newsfeed: FunctionComponent<NewsfeedProps> = (props) => {
               </Link>
             </Box>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={6}>
             <Box textAlign="center" fontSize={16}>
               <RLink to="/NewsPage">
-                <Link href="#" color="inherit">
+                <Link href="#" classes={classes}>
                   Click here to see more top stories
                 </Link>
               </RLink>
