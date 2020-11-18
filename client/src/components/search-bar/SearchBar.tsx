@@ -66,6 +66,12 @@ export const SearchBar: FunctionComponent<SearchBarProps> = (props) => {
     window.localStorage.setItem("fromCurrency", query);
   }
 
+  function clearInputs() {
+    (document.getElementById("stock") as HTMLInputElement).value = "";
+    (document.getElementById("forexTo") as HTMLInputElement).value = "";
+    (document.getElementById("forexFrom") as HTMLInputElement).value = "";
+  }
+
   return (
     <AppBar position="sticky" className={classes.root}>
       <Container maxWidth="lg">
@@ -79,34 +85,39 @@ export const SearchBar: FunctionComponent<SearchBarProps> = (props) => {
                 style={{
                   marginTop: "9px",
                 }}
+                onClick={() => clearInputs()}
               >
                 Home
               </Button>
             </Link>
           </Box>
           <Box alignContent="center" justifyContent="flex-start">
-            <TextField
-              size="small"
-              margin="dense"
-              placeholder="Search for a stock"
-              variant="outlined"
-              classes={classes}
-              id="stock"
-              onKeyUp={() => handleStockSearch()}
-            />
-            <Link to="/StockPage">
-              <Button
-                variant="contained"
-                size="medium"
-                color="primary"
-                style={{
-                  marginLeft: "3px",
-                  marginTop: "9px",
-                }}
-              >
-                Search
-              </Button>
-            </Link>
+            <form>
+              <TextField
+                size="small"
+                margin="dense"
+                placeholder="Search for a stock"
+                variant="outlined"
+                classes={classes}
+                id="stock"
+                aria-label="Search for a stock"
+                onKeyUp={() => handleStockSearch()}
+              />
+              <Link to="/StockPage">
+                <Button
+                  variant="contained"
+                  size="medium"
+                  color="primary"
+                  style={{
+                    marginLeft: "3px",
+                    marginTop: "9px",
+                  }}
+                  onClick={() => clearInputs()}
+                >
+                  Search
+                </Button>
+              </Link>
+            </form>
           </Box>
           <Box alignContent="flex-end">
             <TextField
@@ -116,6 +127,7 @@ export const SearchBar: FunctionComponent<SearchBarProps> = (props) => {
               variant="outlined"
               classes={classes}
               id="forexFrom"
+              aria-label="Search for a to currency"
               onKeyUp={() => handleFromCurrency()}
             />{" "}
             <TextField
@@ -125,6 +137,7 @@ export const SearchBar: FunctionComponent<SearchBarProps> = (props) => {
               variant="outlined"
               classes={classes}
               id="forexTo"
+              aria-label="Search for a from currency"
               onKeyUp={() => handleToCurrency()}
             />
             <Link to="/ForexPage">
@@ -133,6 +146,7 @@ export const SearchBar: FunctionComponent<SearchBarProps> = (props) => {
                 size="medium"
                 color="primary"
                 style={{ marginLeft: "3px", marginTop: "9px" }}
+                onClick={() => clearInputs()}
               >
                 Search
               </Button>

@@ -1,7 +1,9 @@
 import React, { FunctionComponent } from "react";
 import Chart from "react-apexcharts";
+import { Container } from "@material-ui/core";
 // @ts-ignore
 export interface UnemploymentChartProps {
+  oct2020: string | number;
   sept2020: string | number;
   aug2020: string | number;
   july2020: string | number;
@@ -12,6 +14,7 @@ export interface UnemploymentChartProps {
   feb2020: string | number;
   jan2020: string | number;
 
+  oct2019: string | number;
   sept2019: string | number;
   aug2019: string | number;
   july2019: string | number;
@@ -21,16 +24,6 @@ export interface UnemploymentChartProps {
   march2019: string | number;
   feb2019: string | number;
   jan2019: string | number;
-
-  sept2018: string | number;
-  aug2018: string | number;
-  july2018: string | number;
-  june2018: string | number;
-  may2018: string | number;
-  april2018: string | number;
-  march2018: string | number;
-  feb2018: string | number;
-  jan2018: string | number;
 }
 
 export const UnemploymentChart: FunctionComponent<UnemploymentChartProps> = (
@@ -40,8 +33,15 @@ export const UnemploymentChart: FunctionComponent<UnemploymentChartProps> = (
     chart: {
       height: "50%",
       width: "50%",
-      background: "#f4f4f4",
+      background: "#212121",
       foreColor: "#333333",
+    },
+    title: {
+      text: "2019-2020 US Unemployment Statistics",
+      align: "left",
+      style: {
+        color: "#4dd0e1",
+      },
     },
     xaxis: {
       categories: [
@@ -54,8 +54,38 @@ export const UnemploymentChart: FunctionComponent<UnemploymentChartProps> = (
         "July",
         "August",
         "September",
+        "October",
       ],
+      labels: {
+        style: {
+          colors: [
+            "#4dd0e1",
+            "#4dd0e1",
+            "#4dd0e1",
+            "#4dd0e1",
+            "#4dd0e1",
+            "#4dd0e1",
+            "#4dd0e1",
+            "#4dd0e1",
+            "#4dd0e1",
+            "#4dd0e1",
+          ],
+        },
+      },
     },
+    legend: {
+      labels: {
+        colors: "#4dd0e1",
+      },
+    },
+    yaxis: {
+      labels: {
+        style: {
+          colors: ["#4dd0e1"],
+        },
+      },
+    },
+    colors: ["#e53935", "#ffff00"],
   };
 
   const series = [
@@ -71,6 +101,7 @@ export const UnemploymentChart: FunctionComponent<UnemploymentChartProps> = (
         props.july2020,
         props.aug2020,
         props.sept2020,
+        props.oct2020,
       ],
     },
     {
@@ -85,33 +116,18 @@ export const UnemploymentChart: FunctionComponent<UnemploymentChartProps> = (
         props.july2019,
         props.aug2019,
         props.sept2019,
-      ],
-    },
-    {
-      name: "Percentage of US population that was unemployed in 2018",
-      data: [
-        props.jan2018,
-        props.feb2018,
-        props.march2018,
-        props.april2018,
-        props.may2018,
-        props.june2018,
-        props.july2018,
-        props.aug2018,
-        props.sept2018,
+        props.oct2019,
       ],
     },
   ];
   return (
-    <div>
-      <Chart
-        type="line"
-        options={options}
-        series={series}
-        height="300"
-        width="50%"
-      />
-    </div>
+    <Chart
+      type="line"
+      options={options}
+      series={series}
+      height="300"
+      width="100%"
+    />
   );
 };
 

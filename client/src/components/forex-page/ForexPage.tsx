@@ -114,7 +114,7 @@ export const ForexPage: FunctionComponent<ForexPageProps> = (props) => {
   } else if (error === true) {
     return (
       <Container maxWidth="lg">
-        <Box textAlign="center">
+        <Box textAlign="center" color="#e53935">
           <h1>We cannot find what you are searching for!</h1>
           <br />
           <h1>Please check your search inputs or try again later!</h1>
@@ -124,7 +124,7 @@ export const ForexPage: FunctionComponent<ForexPageProps> = (props) => {
   } else {
     return (
       <Container maxWidth="lg">
-        <Box textAlign="center">
+        <Box textAlign="center" color="#e53935">
           <h1>Loading...</h1>
         </Box>
       </Container>

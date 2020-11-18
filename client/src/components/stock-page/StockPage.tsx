@@ -114,7 +114,7 @@ export const StockPage: FunctionComponent<StockPageProps> = (props) => {
   } else if (error === true) {
     return (
       <Container maxWidth="lg">
-        <Box textAlign="center">
+        <Box textAlign="center" color="#e53935">
           <h1>It seems as though we can't find results for your search</h1>
           <br />
           <h1>Please check your search query or try again later</h1>
@@ -124,7 +124,7 @@ export const StockPage: FunctionComponent<StockPageProps> = (props) => {
   } else {
     return (
       <Container maxWidth="lg">
-        <Box textAlign="center">
+        <Box textAlign="center" color="#e53935">
           <h1>Loading your results!</h1>
         </Box>
       </Container>

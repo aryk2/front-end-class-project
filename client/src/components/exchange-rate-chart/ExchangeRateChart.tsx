@@ -18,13 +18,24 @@ export const ExchangeRateChart: FunctionComponent<ExchangeRateChartProps> = (
   const EUR = props.EUR;
   const options = {
     chart: {
-      height: "50%",
-      width: "50%",
-      background: "#f4f4f4",
-      foreColor: "#333333",
+      height: "300",
+      width: "100%",
+      background: "#212121",
+      foreColor: "#4dd0e1",
+    },
+    title: {
+      text: "Popularly traded currencies compared to USD",
+      align: "left",
+      style: {
+        color: "#4dd0e1",
+      },
     },
     xaxis: {
       categories: ["Canadian Dollar", "British Pound", "Kuwaiti Dinar", "Euro"],
+    },
+
+    fill: {
+      colors: ["#d32f2f", "#8e24aa", "#ffeb3b", "#1976d2"],
     },
   };
 
@@ -36,15 +47,13 @@ export const ExchangeRateChart: FunctionComponent<ExchangeRateChartProps> = (
   ];
 
   return (
-    <div>
-      <Chart
-        type="bar"
-        options={options}
-        series={series}
-        height="300"
-        width="50%"
-      />
-    </div>
+    <Chart
+      type="bar"
+      options={options}
+      series={series}
+      height="300"
+      width="100%"
+    />
   );
 };
 
