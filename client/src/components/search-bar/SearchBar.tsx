@@ -35,6 +35,9 @@ const useStyles = makeStyles({
 
 export const SearchBar: FunctionComponent<SearchBarProps> = (props) => {
   const classes = useStyles();
+  const [stock, setStock] = useState("");
+  const [fromCurrency, setFromCurrency] = useState("");
+  const [toCurrency, setToCurrency] = useState("");
 
   function handleStockSearch() {
     let elem = (document.getElementById("stock") as HTMLInputElement).value;
@@ -44,6 +47,7 @@ export const SearchBar: FunctionComponent<SearchBarProps> = (props) => {
     }
 
     window.localStorage.setItem("stock", query);
+    setStock(query);
   }
 
   function handleToCurrency() {
@@ -53,6 +57,7 @@ export const SearchBar: FunctionComponent<SearchBarProps> = (props) => {
       query += elem[i].toUpperCase();
     }
     window.localStorage.setItem("toCurrency", query);
+    setToCurrency(query);
   }
 
   function handleFromCurrency() {
@@ -64,6 +69,7 @@ export const SearchBar: FunctionComponent<SearchBarProps> = (props) => {
     }
 
     window.localStorage.setItem("fromCurrency", query);
+    setFromCurrency(query);
   }
 
   function clearInputs() {
@@ -103,7 +109,7 @@ export const SearchBar: FunctionComponent<SearchBarProps> = (props) => {
                 aria-label="Search for a stock"
                 onKeyUp={() => handleStockSearch()}
               />
-              <Link to="/StockPage">
+              <Link to={`/StockPage/${stock}`}>
                 <Button
                   variant="contained"
                   size="medium"
@@ -140,7 +146,7 @@ export const SearchBar: FunctionComponent<SearchBarProps> = (props) => {
               aria-label="Search for a from currency"
               onKeyUp={() => handleToCurrency()}
             />
-            <Link to="/ForexPage">
+            <Link to={`/ForexPage/${fromCurrency}/${toCurrency}`}>
               <Button
                 variant="contained"
                 size="medium"
