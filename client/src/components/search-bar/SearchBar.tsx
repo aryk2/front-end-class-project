@@ -35,6 +35,9 @@ const useStyles = makeStyles({
 
 export const SearchBar: FunctionComponent<SearchBarProps> = (props) => {
   const classes = useStyles();
+  const [stock, setStock] = useState("");
+  const [fromCurrency, setFromCurrency] = useState("");
+  const [toCurrency, setToCurrency] = useState("");
 
   function handleStockSearch() {
     let elem = (document.getElementById("stock") as HTMLInputElement).value;
@@ -44,6 +47,7 @@ export const SearchBar: FunctionComponent<SearchBarProps> = (props) => {
     }
 
     window.localStorage.setItem("stock", query);
+    setStock(query);
   }
 
   function handleToCurrency() {
@@ -53,6 +57,7 @@ export const SearchBar: FunctionComponent<SearchBarProps> = (props) => {
       query += elem[i].toUpperCase();
     }
     window.localStorage.setItem("toCurrency", query);
+    setToCurrency(query);
   }
 
   function handleFromCurrency() {
@@ -64,6 +69,13 @@ export const SearchBar: FunctionComponent<SearchBarProps> = (props) => {
     }
 
     window.localStorage.setItem("fromCurrency", query);
+    setFromCurrency(query);
+  }
+
+  function clearInputs() {
+    (document.getElementById("stock") as HTMLInputElement).value = "";
+    (document.getElementById("forexTo") as HTMLInputElement).value = "";
+    (document.getElementById("forexFrom") as HTMLInputElement).value = "";
   }
 
   return (
@@ -79,34 +91,39 @@ export const SearchBar: FunctionComponent<SearchBarProps> = (props) => {
                 style={{
                   marginTop: "9px",
                 }}
+                onClick={() => clearInputs()}
               >
                 Home
               </Button>
             </Link>
           </Box>
           <Box alignContent="center" justifyContent="flex-start">
-            <TextField
-              size="small"
-              margin="dense"
-              placeholder="Search for a stock"
-              variant="outlined"
-              classes={classes}
-              id="stock"
-              onKeyUp={() => handleStockSearch()}
-            />
-            <Link to="/StockPage">
-              <Button
-                variant="contained"
-                size="medium"
-                color="primary"
-                style={{
-                  marginLeft: "3px",
-                  marginTop: "9px",
-                }}
-              >
-                Search
-              </Button>
-            </Link>
+            <form>
+              <TextField
+                size="small"
+                margin="dense"
+                placeholder="Search for a stock"
+                variant="outlined"
+                classes={classes}
+                id="stock"
+                aria-label="Search for a stock"
+                onKeyUp={() => handleStockSearch()}
+              />
+              <Link to={`/stock/${stock}`}>
+                <Button
+                  variant="contained"
+                  size="medium"
+                  color="primary"
+                  style={{
+                    marginLeft: "3px",
+                    marginTop: "9px",
+                  }}
+                  onClick={() => clearInputs()}
+                >
+                  Search
+                </Button>
+              </Link>
+            </form>
           </Box>
           <Box alignContent="flex-end">
             <TextField
@@ -116,6 +133,7 @@ export const SearchBar: FunctionComponent<SearchBarProps> = (props) => {
               variant="outlined"
               classes={classes}
               id="forexFrom"
+              aria-label="Search for a to currency"
               onKeyUp={() => handleFromCurrency()}
             />{" "}
             <TextField
@@ -125,14 +143,16 @@ export const SearchBar: FunctionComponent<SearchBarProps> = (props) => {
               variant="outlined"
               classes={classes}
               id="forexTo"
+              aria-label="Search for a from currency"
               onKeyUp={() => handleToCurrency()}
             />
-            <Link to="/ForexPage">
+            <Link to={`/forex/${fromCurrency}/${toCurrency}`}>
               <Button
                 variant="contained"
                 size="medium"
                 color="primary"
                 style={{ marginLeft: "3px", marginTop: "9px" }}
+                onClick={() => clearInputs()}
               >
                 Search
               </Button>

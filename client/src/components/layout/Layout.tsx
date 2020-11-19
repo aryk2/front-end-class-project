@@ -15,6 +15,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { useHistory } from 'react-router-dom';
 import HomeIcon from '@material-ui/icons/Home';
 import TimelineIcon from '@material-ui/icons/Timeline';
+import SearchBar from '../search-bar/SearchBar'
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -97,10 +99,10 @@ export const Layout = (props: {children: React.ReactNode}) => {
     <div>
       <AppBar position="static">
         <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu"             onClick={handleDrawerOpen}
->
+          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={handleDrawerOpen}>
             <MenuIcon />
           </IconButton>
+          <SearchBar />
         </Toolbar>
       </AppBar>
       <Drawer
