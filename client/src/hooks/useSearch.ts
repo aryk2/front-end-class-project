@@ -1,17 +1,33 @@
-import React, {useState} from 'react'
+import {useState} from 'react'
 import {forexSearch} from '../models/forexSearch' 
 
-const useSearch = () => {
+const defaultForexSearch: forexSearch  = {
+    fromCurrency: '',
+    toCurrency: '',
+};
 
-    const defaultForexSearch: forexSearch  = {
-        fromCurrency: '',
-        toCurrency: '',
-    }
+
+const useSearch = () => {
 
     const [searchStock, setSearchStock] = useState<string>('');
     const [searchForex, setSearchForex] = useState<forexSearch>(defaultForexSearch);
 
-    const [favoriteItems, setFavoriteItems] = useState<item[]>(null)
+
+    const handleSearchStock = (symbol: string) => {
+        setSearchStock(symbol);
+    }
+
+    const handleSearchForex = (forexSearch: forexSearch) => {
+        setSearchForex(forexSearch);
+    }
+
+
+    return {
+        searchStock,
+        searchForex,
+        handleSearchStock,
+        handleSearchForex,
+    }
 }
 
 export default useSearch
