@@ -9,16 +9,24 @@ import Error from './pages/error'
 import Forex from './pages/forex'
 import Stock from './pages/stock'
 
+import useSearch from './hooks/useSearch'
 
 function App() {
+  const searchProps = {...useSearch()}
+
   return (
     <div className="App">
       <main>
             <Switch>
-                <Route path="/" component={Dashboard} exact />
-                <Route path="/other-graphs" component={Graphs} exact /> 
-                <Route path="/forex" component={Forex} exact /> 
-                <Route path="/stock" component={Stock} exact /> 
+                <Route path="/" exact render={() => (
+                  <Dashboard searchProps={searchProps}/>
+                )}/>
+                <Route path="/forex" exact render={() => (
+                  <Forex searchProps={searchProps}/>
+                )}/> 
+                <Route path="/stock" exact render={() => (
+                  <Stock searchProps={searchProps} stock={searchProps.searchStock}/>
+                )}/> 
 
 
                 {/* <Route path="/another-page" component={AnotherPage} /> */}

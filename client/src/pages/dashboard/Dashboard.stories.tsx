@@ -7,5 +7,6 @@ export default {
 }
 
 export const DashboardStyled = () => (
-  <Dashboard />
+  // <Dashboard />
+  <></>
 )

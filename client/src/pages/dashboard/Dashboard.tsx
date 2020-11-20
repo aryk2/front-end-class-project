@@ -1,13 +1,14 @@
 import React, { FunctionComponent } from 'react'
 import Layout from '../../components/layout'
 import Homepage from '../../components/home-page/HomePage'
+import {PageProps} from '../../models/pageProps'
 
-// @ts-ignore
-export interface DashboardProps {}
+export interface DashboardProps extends PageProps {}
+
 
 export const Dashboard: FunctionComponent<DashboardProps> = (props) => {
   return (
-    <Layout>
+    <Layout searchProps={props.searchProps}>
       <Homepage />
     </Layout>
 

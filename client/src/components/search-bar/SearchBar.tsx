@@ -2,11 +2,15 @@ import React, { FunctionComponent, useState } from "react";
 import { TextField, Container, AppBar, Box, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { Redirect } from "react-router-dom";
-import StockPage from "../stock-page/StockPage";
-import ForexPage from "../forex-page/ForexPage";
+import {forexSearch} from '../../models/forexSearch' 
+
 // @ts-ignore
-export interface SearchBarProps {}
+export interface SearchBarProps {
+  searchStock: string
+  searchForex: forexSearch
+  handleSearchStock: (searchStock: string) => void
+  handleSearchForex: (searchForex: forexSearch) => void
+}
 
 const useStyles = makeStyles({
   root: {
@@ -34,43 +38,47 @@ const useStyles = makeStyles({
 });
 
 export const SearchBar: FunctionComponent<SearchBarProps> = (props) => {
+  const { searchStock, searchForex, handleSearchStock, handleSearchForex } = props
+
+
   const classes = useStyles();
-  const [stock, setStock] = useState("");
-  const [fromCurrency, setFromCurrency] = useState("");
-  const [toCurrency, setToCurrency] = useState("");
+  const [stock, setStock] = useState<string>(searchStock);
+  const [fromCurrency, setFromCurrency] = useState(searchForex.fromCurrency);
+  const [toCurrency, setToCurrency] = useState(searchForex.toCurrency);
 
-  function handleStockSearch() {
-    let elem = (document.getElementById("stock") as HTMLInputElement).value;
-    let query = "";
-    for (let i = 0; i < elem.length; ++i) {
-      query += elem[i].toUpperCase();
-    }
 
-    window.localStorage.setItem("stock", query);
-    setStock(query);
-  }
+  // function handleStockSearch() {
+  //   let elem = (document.getElementById("stock") as HTMLInputElement).value;
+  //   let query = "";
+  //   for (let i = 0; i < elem.length; ++i) {
+  //     query += elem[i].toUpperCase();
+  //   }
 
-  function handleToCurrency() {
-    let elem = (document.getElementById("forexTo") as HTMLInputElement).value;
-    let query = "";
-    for (let i = 0; i < elem.length; ++i) {
-      query += elem[i].toUpperCase();
-    }
-    window.localStorage.setItem("toCurrency", query);
-    setToCurrency(query);
-  }
+  //   window.localStorage.setItem("stock", query);
+  //   setStock(query);
+  // }
 
-  function handleFromCurrency() {
-    let elem = (document.getElementById("forexFrom") as HTMLInputElement).value;
+  // function handleToCurrency() {
+  //   let elem = (document.getElementById("forexTo") as HTMLInputElement).value;
+  //   let query = "";
+  //   for (let i = 0; i < elem.length; ++i) {
+  //     query += elem[i].toUpperCase();
+  //   }
+  //   window.localStorage.setItem("toCurrency", query);
+  //   setToCurrency(query);
+  // }
 
-    let query = "";
-    for (let i = 0; i < elem.length; ++i) {
-      query += elem[i].toUpperCase();
-    }
+  // function handleFromCurrency() {
+  //   let elem = (document.getElementById("forexFrom") as HTMLInputElement).value;
 
-    window.localStorage.setItem("fromCurrency", query);
-    setFromCurrency(query);
-  }
+  //   let query = "";
+  //   for (let i = 0; i < elem.length; ++i) {
+  //     query += elem[i].toUpperCase();
+  //   }
+
+  //   window.localStorage.setItem("fromCurrency", query);
+  //   setFromCurrency(query);
+  // }
 
   function clearInputs() {
     (document.getElementById("stock") as HTMLInputElement).value = "";
@@ -107,7 +115,8 @@ export const SearchBar: FunctionComponent<SearchBarProps> = (props) => {
                 classes={classes}
                 id="stock"
                 aria-label="Search for a stock"
-                onKeyUp={() => handleStockSearch()}
+                value={stock}
+                onChange={(event) => setStock(event.target.value)}
               />
               <Link to={`/stock/${stock}`}>
                 <Button
@@ -118,7 +127,7 @@ export const SearchBar: FunctionComponent<SearchBarProps> = (props) => {
                     marginLeft: "3px",
                     marginTop: "9px",
                   }}
-                  onClick={() => clearInputs()}
+                  onClick={() => handleSearchStock(stock)}
                 >
                   Search
                 </Button>
@@ -134,7 +143,7 @@ export const SearchBar: FunctionComponent<SearchBarProps> = (props) => {
               classes={classes}
               id="forexFrom"
               aria-label="Search for a to currency"
-              onKeyUp={() => handleFromCurrency()}
+              onChange={(event) => setFromCurrency(event.target.value)}
             />{" "}
             <TextField
               size="small"
@@ -144,7 +153,7 @@ export const SearchBar: FunctionComponent<SearchBarProps> = (props) => {
               classes={classes}
               id="forexTo"
               aria-label="Search for a from currency"
-              onKeyUp={() => handleToCurrency()}
+              onChange={(event) => setToCurrency(event.target.value)}
             />
             <Link to={`/forex/${fromCurrency}/${toCurrency}`}>
               <Button
@@ -152,7 +161,7 @@ export const SearchBar: FunctionComponent<SearchBarProps> = (props) => {
                 size="medium"
                 color="primary"
                 style={{ marginLeft: "3px", marginTop: "9px" }}
-                onClick={() => clearInputs()}
+                onClick={() => handleSearchForex({fromCurrency, toCurrency})}
               >
                 Search
               </Button>

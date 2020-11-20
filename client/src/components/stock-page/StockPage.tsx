@@ -1,17 +1,21 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
 import Candlechart from "../candlechart/Candlechart";
 import StockTable from "../stock-table/StockTable";
-import {Container, Box} from "@material-ui/core";
-import SearchBar from "../search-bar/SearchBar";
+import {forexSearch} from '../../models/forexSearch' 
+
+
 import { useParams } from "react-router-dom";
 const fetch = require("node-fetch");
 // @ts-ignore
-export interface StockPageProps {}
+export interface StockPageProps {
+  stock: string
+}
 
 const apiKey = process.env.REACT_APP_ALPHA_VANTAGE_KEY;
 
 export const StockPage: FunctionComponent<StockPageProps> = (props) => {
-  const { stock } = useParams();
+  const { stock } = props;
+
   const [open, setOpen] = useState<any>(null);
   const [close, setClose] = useState<any>(null);
   const [high, setHigh] = useState<any>(null);
