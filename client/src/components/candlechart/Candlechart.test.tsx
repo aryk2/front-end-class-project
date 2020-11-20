@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import Candlechart from ".";
+import Candlechart from "./Candlechart";
 const testDates = [
   1,
   2,

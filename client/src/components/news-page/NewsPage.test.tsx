@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from '@testing-library/react'
-import NewsPage from '.'
+import NewsPage from './NewsPage'
 
 describe('NewsPage', () => {
   it('should render the NewsPage component', () => {

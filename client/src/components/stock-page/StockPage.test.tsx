@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import StockPage from ".";
+import StockPage from "./StockPage";
 
 describe("StockPage", () => {
   it("should render the StockPage component", () => {

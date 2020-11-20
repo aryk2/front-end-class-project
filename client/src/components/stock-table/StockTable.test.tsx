@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from '@testing-library/react'
-import StockTable from '.'
+import StockTable from './StockTable'
 
 describe('StockTable', () => {
   it('should render the StockTable component', () => {

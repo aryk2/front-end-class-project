@@ -4,7 +4,9 @@ import Layout from '.'
 
 describe('Layout', () => {
   it('should render the Layout component', () => {
-    const props = {} as any
+    const props = {
+      searchForex: {} as any
+    } as any
     const { container } = render(<Layout { ...props } />)
     expect(container).toBeTruthy()
   })

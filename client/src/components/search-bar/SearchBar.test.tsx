@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from '@testing-library/react'
-import SearchBar from '.'
+import SearchBar from './SearchBar'
 
 describe('SearchBar', () => {
   it('should render the SearchBar component', () => {

@@ -15,6 +15,7 @@ describe("UnemploymentChart", () => {
         july2020={12}
         aug2020={10}
         sept2020={7}
+        oct2020={4}
         jan2019={2}
         feb2019={2.5}
         march2019={3}
@@ -24,15 +25,7 @@ describe("UnemploymentChart", () => {
         july2019={3.3}
         aug2019={3.4}
         sept2019={4}
-        jan2018={4}
-        feb2018={3.4}
-        march2018={3.3}
-        april2018={2.77}
-        may2018={3.4}
-        june2018={3}
-        july2018={3}
-        aug2018={2.5}
-        sept2018={2}
+        oct2019={3}
       />
     );
     expect(true).toBeTruthy();
