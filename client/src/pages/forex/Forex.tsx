@@ -7,9 +7,14 @@ import {PageProps} from '../../models/pageProps'
 export interface ForexProps extends PageProps {}
 
 export const Forex: FunctionComponent<ForexProps> = (props) => {
+
+
   return (
     <Layout searchProps={props.searchProps}>
-      <ForexPage />
+      <ForexPage 
+        fromCurrency={props.searchProps.searchForex.fromCurrency}
+        toCurrency={props.searchProps.searchForex.toCurrency}
+      />
     </Layout>
   )
 }

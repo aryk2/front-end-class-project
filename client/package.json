@@ -35,7 +35,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest",
+    "test": "REACT_APP_TEST=true jest",
     "eject": "react-scripts eject",
     "plop:component": "plop --plopfile ./node_modules/ignw-component-generator/plopfile.ts",
     "storybook": "start-storybook -p 6006 -s public",

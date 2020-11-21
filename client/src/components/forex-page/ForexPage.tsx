@@ -11,10 +11,13 @@ const apiKey = process.env.REACT_APP_ALPHA_VANTAGE_KEY;
 const candleEndpoint =
   "https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=";
 
-export interface ForexPageProps {}
+export interface ForexPageProps { // todo fix props
+  fromCurrency: string
+  toCurrency: string
+}
 
 export const ForexPage: FunctionComponent<ForexPageProps> = (props) => {
-  const { fromCurrency, toCurrency } = useParams();
+  const { fromCurrency, toCurrency } = props;
   
 
   const [isLoadedCandleQuote, setLoadedCandleQuote] = useState<null | true>(

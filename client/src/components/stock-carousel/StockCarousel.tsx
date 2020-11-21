@@ -1,7 +1,10 @@
 import React, { FunctionComponent } from 'react'
 import Carousel from 'react-multi-carousel';
+// @ts-ignore
 import 'react-multi-carousel/lib/styles.css';
 import StockCard from '../stock-card'
+import {favoriteItem} from '../../models/favoriteItem'
+import {PageProps} from '../../models/pageProps'
 
 const responsive = {
   desktop: {
@@ -23,9 +26,15 @@ const responsive = {
 
 
 // @ts-ignore
-export interface StockCarouselProps {}
+export interface StockCarouselProps extends PageProps{
+  favoriteItems: favoriteItem[]
+
+}
 
 export const StockCarousel: FunctionComponent<StockCarouselProps> = (props) => {
+
+
+
   return (
     <div>
       <Carousel
@@ -43,14 +52,16 @@ export const StockCarousel: FunctionComponent<StockCarouselProps> = (props) => {
         dotListClass="custom-dot-list-style"
         itemClass="carousel-item-padding-40-px"
       >
-        <div><StockCard symbol={'AAPL'}/></div>
-        <div><StockCard symbol={'F'}/></div>
-        <div><StockCard symbol={'TSLA'}/></div>
-        <div><StockCard symbol={'USD'}/></div>
-        <div><StockCard symbol={'FDA'}/></div>
-        <div><StockCard symbol={'PEN'}/></div>
-        <div><StockCard symbol={'GUY'}/></div>
-
+        {
+          props.favoriteItems ?
+            props.favoriteItems.map((favorite, index) => {
+              return (
+                <div id={String(index)}><StockCard symbol={favorite.symbol} handleStockSearch={props.searchProps.handleSearchStock}/></div>
+              )
+            })
+          :
+            []
+        }
       </Carousel>
 
     </div>

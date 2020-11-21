@@ -5,6 +5,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import useStockCard from '../../hooks/useStockCard'
 
 const useStyles = makeStyles({
   root: {
@@ -20,17 +21,19 @@ const useStyles = makeStyles({
     fontSize: 14,
   },
   pos: {
-    marginBottom: 12,
+    marginBottom: 4,
   },
 });
 
 // @ts-ignore
 export interface StockCardProps {
   symbol: string
+  handleStockSearch: (symbol: string) => void
 }
 
 export const StockCard: FunctionComponent<StockCardProps> = (props) => {
   const classes = useStyles();
+  const {loaded, current} = useStockCard(props.symbol)
 
   return (
     <>
@@ -39,17 +42,12 @@ export const StockCard: FunctionComponent<StockCardProps> = (props) => {
           <Typography className={classes.title} color="textSecondary" gutterBottom>
             {props.symbol}
           </Typography>
-          <Typography className={classes.pos} color="textSecondary">
-            adjective
-          </Typography>
-          <Typography variant="body2" component="p">
-            well meaning and kindly.
-            <br />
-            {'"a benevolent smile"'}
+          <Typography className={classes.pos} variant={'h5'}>
+            {loaded ? current : 'loading'}
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small">Learn More</Button>
+          <Button size="small" onClick={() => props.handleStockSearch(props.symbol)}>Stock Page</Button>
         </CardActions>
       </Card>
     </>

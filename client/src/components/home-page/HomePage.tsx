@@ -4,11 +4,23 @@ import { Grid } from "@material-ui/core";
 import LaborInformation from "../labor-information/LaborInformation";
 import StockCarousel from "../stock-carousel"
 import CurrencyStrength from "../currency-strength/CurrencyStrength";
+import {favoriteItem} from '../../models/favoriteItem'
+import {PageProps} from '../../models/pageProps'
 
 // @ts-ignore
-export interface HomePageProps {}
+export interface HomePageProps extends PageProps {
+  test?: boolean
+  homePageProps: {
+    favoriteItems: favoriteItem[]
+    handleAddFavorite: (favoriteItem: favoriteItem) => void
+    handleRemoveFavorite: (favoriteItem: favoriteItem) => void
+  }
+}
 
 export const HomePage: FunctionComponent<HomePageProps> = (props) => {
+  const {favoriteItems} = props.homePageProps
+
+
   return (
     <Grid
       container
@@ -18,7 +30,11 @@ export const HomePage: FunctionComponent<HomePageProps> = (props) => {
       spacing={1}
     >
       <Grid item xs={12} style={{paddingRight: 40}}>
-        <StockCarousel />
+        {!!!props.test ? 
+          <StockCarousel favoriteItems={favoriteItems} searchProps={props.searchProps}/> 
+        : 
+          null
+        }
       </Grid>    
 
       <Grid item xs={6}>

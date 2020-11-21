@@ -1,14 +1,17 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
 import Candlechart from "../candlechart/Candlechart";
 import StockTable from "../stock-table/StockTable";
-import {forexSearch} from '../../models/forexSearch' 
+import {favoriteItem} from '../../models/favoriteItem'
 
-
-import { useParams } from "react-router-dom";
 const fetch = require("node-fetch");
 // @ts-ignore
 export interface StockPageProps {
   stock: string
+  favoriteFunctions: {
+    favorites: favoriteItem[]
+    handleAddFavorite: (favoriteItem: favoriteItem) => void
+    handleRemoveFavorite: (favoriteItem: favoriteItem) => void
+  }
 }
 
 const apiKey = process.env.REACT_APP_ALPHA_VANTAGE_KEY;
@@ -104,6 +107,7 @@ export const StockPage: FunctionComponent<StockPageProps> = (props) => {
         stockName={stock}
         date={dates[0]}
         current={open[0]}
+        favoriteFunctions={props.favoriteFunctions}
       />
     </div>
   ) : (
