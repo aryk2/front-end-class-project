@@ -5,9 +5,7 @@ import Layout from '../../components/layout'
 
 export const Graphs = () => {
   return (
-    <Layout>
-      other graphs
-    </Layout>
+    <></>
 
   )
 }

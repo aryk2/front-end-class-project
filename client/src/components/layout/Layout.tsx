@@ -15,6 +15,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { useHistory } from 'react-router-dom';
 import HomeIcon from '@material-ui/icons/Home';
 import TimelineIcon from '@material-ui/icons/Timeline';
+import SearchBar from '../search-bar/SearchBar'
+import {forexSearch} from '../../models/forexSearch'
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -75,8 +78,15 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
+interface SearchProps {
+  searchStock: string
+  searchForex: forexSearch
+  handleSearchStock: (searchStock: string) => void
+  handleSearchForex: (searchForex: forexSearch) => void
+}
 
-export const Layout = (props: {children: React.ReactNode}) => {
+
+export const Layout = (props: {children: React.ReactNode, searchProps: SearchProps}) => {
 
   const classes = useStyles();
   const history = useHistory();
@@ -97,10 +107,10 @@ export const Layout = (props: {children: React.ReactNode}) => {
     <div>
       <AppBar position="static">
         <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu"             onClick={handleDrawerOpen}
->
+          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={handleDrawerOpen}>
             <MenuIcon />
           </IconButton>
+          <SearchBar {...props.searchProps}/>
         </Toolbar>
       </AppBar>
       <Drawer

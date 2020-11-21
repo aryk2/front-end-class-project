@@ -1,14 +1,26 @@
 import React, { FunctionComponent } from "react";
-import Newsfeed from "../newsfeed";
-import { Container, Grid } from "@material-ui/core";
-import LaborInformation from "../labor-information";
-
-import CurrencyStrength from "../currency-strength";
+import Newsfeed from "../newsfeed/Newsfeed";
+import { Grid } from "@material-ui/core";
+import LaborInformation from "../labor-information/LaborInformation";
+import StockCarousel from "../stock-carousel"
+import CurrencyStrength from "../currency-strength/CurrencyStrength";
+import {favoriteItem} from '../../models/favoriteItem'
+import {PageProps} from '../../models/pageProps'
 
 // @ts-ignore
-export interface HomePageProps {}
+export interface HomePageProps extends PageProps {
+  test?: boolean
+  homePageProps: {
+    favoriteItems: favoriteItem[]
+    handleAddFavorite: (favoriteItem: favoriteItem) => void
+    handleRemoveFavorite: (favoriteItem: favoriteItem) => void
+  }
+}
 
 export const HomePage: FunctionComponent<HomePageProps> = (props) => {
+  const {favoriteItems} = props.homePageProps
+
+
   return (
     <Grid
       container
@@ -17,6 +29,14 @@ export const HomePage: FunctionComponent<HomePageProps> = (props) => {
       alignContent="center"
       spacing={1}
     >
+      <Grid item xs={12} style={{paddingRight: 40}}>
+        {!!!props.test ? 
+          <StockCarousel favoriteItems={favoriteItems} searchProps={props.searchProps}/> 
+        : 
+          null
+        }
+      </Grid>    
+
       <Grid item xs={6}>
         <LaborInformation />
       </Grid>

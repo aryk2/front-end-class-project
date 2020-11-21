@@ -1,8 +1,8 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
-import ForexTable from "../forex-table";
-import Candlechart from "../candlechart";
+import ForexTable from "../forex-table/ForexTable";
+import Candlechart from "../candlechart/Candlechart";
 import { Container, Box } from "@material-ui/core";
-import SearchBar from "../search-bar";
+import SearchBar from "../search-bar/SearchBar";
 import { useParams } from "react-router-dom";
 const fetch = require("node-fetch");
 // @ts-ignore
@@ -11,10 +11,14 @@ const apiKey = process.env.REACT_APP_ALPHA_VANTAGE_KEY;
 const candleEndpoint =
   "https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=";
 
-export interface ForexPageProps {}
+export interface ForexPageProps { // todo fix props
+  fromCurrency: string
+  toCurrency: string
+}
 
 export const ForexPage: FunctionComponent<ForexPageProps> = (props) => {
-  const { fromCurrency, toCurrency } = useParams();
+  const { fromCurrency, toCurrency } = props;
+  
 
   const [isLoadedCandleQuote, setLoadedCandleQuote] = useState<null | true>(
     null

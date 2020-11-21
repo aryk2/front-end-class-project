@@ -1,5 +1,11 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useState } from "react";
 import Table, { Button, Grid, Box } from "@material-ui/core";
+import {favoriteItem} from '../../models/favoriteItem'
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
+import Favorite from '@material-ui/icons/Favorite';
+
 // @ts-ignore
 export interface StockTableProps {
   open: string;
@@ -9,9 +15,32 @@ export interface StockTableProps {
   previousClose: string;
   stockName: string;
   date: string;
+  favoriteFunctions: {
+    favorites: favoriteItem[]
+    handleAddFavorite: (favoriteItem: favoriteItem) => void
+    handleRemoveFavorite: (favoriteItem: favoriteItem) => void
+  }
+}
+
+const isFavorite = (favorites: favoriteItem[], symbol: string): boolean => {
+  if (!favorites) return false
+  const favoritesList: favoriteItem[] = favorites.filter((favorite) => favorite.symbol === symbol)
+  return !!favoritesList.length
 }
 
 export const StockTable: FunctionComponent<StockTableProps> = (props) => {
+  const {favorites, handleAddFavorite, handleRemoveFavorite} = props.favoriteFunctions
+  const [favorite, setFavorite] = useState<boolean>(isFavorite(favorites, props.stockName))
+
+  const handleFavoriteChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFavorite(event.target.checked)
+    if(event.target.checked) {
+      handleAddFavorite({symbol: props.stockName})
+      return
+    }
+    handleRemoveFavorite({symbol: props.stockName})
+  }
+
   return (
     <Grid
       container
@@ -20,21 +49,26 @@ export const StockTable: FunctionComponent<StockTableProps> = (props) => {
       alignItems="center"
       style={{ backgroundColor: "#212121" }}
     >
+      <Grid item xs={12} >
+        <Grid
+          container
+          direction="row"
+          justify="flex-start"
+          alignItems="center"
+          style={{marginLeft: 20}}
+          >            
+          <FormControlLabel
+            control={<Checkbox checked={favorite} onChange={handleFavoriteChange} icon={<FavoriteBorder />} checkedIcon={<Favorite />} name="checkedH" />}
+            label="Favorite"
+          />
+        </Grid>
+      </Grid>
       <Grid item xs={12}>
         <Box borderBottom={1} textAlign="center" style={{ color: "#26c6da" }}>
           <h1>{props.stockName}</h1>
           <h2>
             Last Updated: {props.date}
-            <span>
-              <Button
-                size="small"
-                variant="contained"
-                color="primary"
-                style={{ marginLeft: "3px" }}
-              >
-                Add to Favs
-              </Button>{" "}
-            </span>
+
           </h2>
         </Box>
       </Grid>

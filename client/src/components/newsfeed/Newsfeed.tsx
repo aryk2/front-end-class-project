@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 
 import { Link as RLink } from "react-router-dom";
-import SearchBar from "../search-bar";
+import SearchBar from "../search-bar/SearchBar";
 const apiKey = process.env.REACT_APP_FINNHUB_KEY;
 const newsCall =
   "https://finnhub.io/api/v1/news?category=general&token=" + apiKey;
