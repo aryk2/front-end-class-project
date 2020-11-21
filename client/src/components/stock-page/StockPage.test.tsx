@@ -4,8 +4,8 @@ import StockPage from "./StockPage";
 
 describe("StockPage", () => {
   it("should render the StockPage component", () => {
-    const props = {} as any;
-    const { container } = render(<StockPage stock={"IBM"} />);
+    const props = {favoriteFunctions: {} as any} as any;
+    const { container } = render(<StockPage stock={"IBM"} {...props}/>);
     expect(container).toBeTruthy();
   });
 });
