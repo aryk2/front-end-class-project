@@ -4,9 +4,9 @@ import ForexTable from "./ForexTable";
 
 describe("ForexTable", () => {
   it("should render the ForexTable component", () => {
-    const props = {} as any;
+    const props = {favoriteFunctions: {} as any} as any;
     const { container } = render(
-      <ForexTable toCurrencyShort={"GBP"} fromCurrencyShort={"USD"} />
+      <ForexTable {...props} toCurrencyShort={"GBP"} fromCurrencyShort={"USD"} />
     );
     expect(container).toBeTruthy();
   });

@@ -124,7 +124,7 @@ export const ForexTable: FunctionComponent<ForexTableProps> = (props) => {
         <Grid item xs={12}>
           <Box borderBottom={1} textAlign="center" style={{ color: "black" }}>
             <h1>
-              {fromCurrencyLong.toUpperCase()} to {toCurrencyLong.toUpperCase()}
+              {fromCurrencyLong?.toUpperCase()} to {toCurrencyLong?.toUpperCase()}
             </h1>
           </Box>
         </Grid>

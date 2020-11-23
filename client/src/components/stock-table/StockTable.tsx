@@ -64,7 +64,7 @@ export const StockTable: FunctionComponent<StockTableProps> = (props) => {
       </Grid>
       <Grid item xs={12}>
         <Box borderBottom={1} textAlign="center">
-          <h1>{props.stockName.toUpperCase()}</h1>
+          <h1>{props.stockName?.toUpperCase()}</h1>
           <h2>
             Last Updated: {props.date}
 
