@@ -1,6 +1,12 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
+import {
+  Box,
+  Paper,
+  Typography,
+} from "@material-ui/core";
+import { makeStyles, Theme } from "@material-ui/core/styles";
 import UnemploymentChart from "../unemployment-chart/UnemploymentChart";
-import { Container } from "@material-ui/core";
+
 const laborKey = process.env.REACT_APP_BLS_KEY;
 const laborUrl =
   "https://api.bls.gov/publicAPI/v2/timeseries/data/LNS14000000?registrationkey=" +
@@ -8,10 +14,22 @@ const laborUrl =
 // @ts-ignore
 export interface LaborInformationProps {}
 
+
+const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    margin: theme.spacing(0, 0, 5),
+  },
+  paper: {
+    padding: theme.spacing(2, 1),
+  },
+}));
+
 export const LaborInformation: FunctionComponent<LaborInformationProps> = (
   props
 ) => {
-  const [isLoaded, setLoading] = useState(false);
+  const classes = useStyles();
+
+  const [isLoaded, setLoading] = useState<boolean>(false);
   const [oct2020, setOct2020] = useState("");
   const [sept2020, setSept2020] = useState("");
   const [aug2020, setAug2020] = useState("");
@@ -78,38 +96,40 @@ export const LaborInformation: FunctionComponent<LaborInformationProps> = (
     }
   }, []);
 
-  if (isLoaded === true) {
-    return (
-      <UnemploymentChart
-        jan2019={jan2019}
-        feb2019={feb2019}
-        march2019={march2019}
-        april2019={april2019}
-        may2019={may2019}
-        june2019={june2019}
-        july2019={july2019}
-        aug2019={aug2019}
-        sept2019={sept2019}
-        oct2019={oct2019}
-        jan2020={jan2020}
-        feb2020={feb2020}
-        march2020={march2020}
-        april2020={april2020}
-        may2020={may2020}
-        june2020={june2020}
-        july2020={july2020}
-        aug2020={aug2020}
-        sept2020={sept2020}
-        oct2020={oct2020}
-      />
-    );
-  } else {
-    return (
-      <Container maxWidth="lg" style={{ color: "#ffff00" }}>
-        <h1>Loading latest BLS Unemployment Data</h1>
-      </Container>
-    );
-  }
+  return (  
+    <Box className={classes.root}>
+      <Paper className={classes.paper}>
+
+      {isLoaded ? 
+          <UnemploymentChart
+              jan2019={jan2019}
+              feb2019={feb2019}
+              march2019={march2019}
+              april2019={april2019}
+              may2019={may2019}
+              june2019={june2019}
+              july2019={july2019}
+              aug2019={aug2019}
+              sept2019={sept2019}
+              oct2019={oct2019}
+              jan2020={jan2020}
+              feb2020={feb2020}
+              march2020={march2020}
+              april2020={april2020}
+              may2020={may2020}
+              june2020={june2020}
+              july2020={july2020}
+              aug2020={aug2020}
+              sept2020={sept2020}
+              oct2020={oct2020}
+            />
+          : 
+          <Typography>loading</Typography>
+
+          }
+      </Paper>
+    </Box>
+  )
 };
 
 export default LaborInformation;

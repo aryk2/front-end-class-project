@@ -105,9 +105,9 @@ export const Layout = (props: {children: React.ReactNode, searchProps: SearchPro
 
   return (
     <div>
-      <AppBar position="static">
+      <AppBar position="static" style={{backgroundColor: '#2196f3', width: '100%'}}>
         <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={handleDrawerOpen}>
+          <IconButton edge="start" className={classes.menuButton} aria-label="menu" onClick={handleDrawerOpen}>
             <MenuIcon />
           </IconButton>
           <SearchBar {...props.searchProps}/>
@@ -133,11 +133,6 @@ export const Layout = (props: {children: React.ReactNode, searchProps: SearchPro
           onClick={() => history.push('/')}>
             <ListItemIcon><HomeIcon /></ListItemIcon>
             <ListItemText primary={'Home'} />
-          </ListItem>
-          <ListItem button key={'graphs'} 
-            onClick={() => history.push('/other-graphs')}>
-            <ListItemIcon><TimelineIcon /></ListItemIcon>
-            <ListItemText primary={'Graphs'} />
           </ListItem>
         </List>
       </Drawer>

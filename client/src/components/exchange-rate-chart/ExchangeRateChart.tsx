@@ -20,14 +20,13 @@ export const ExchangeRateChart: FunctionComponent<ExchangeRateChartProps> = (
     chart: {
       height: "300",
       width: "100%",
-      background: "#212121",
-      foreColor: "#4dd0e1",
+      foreColor: "black",
     },
     title: {
       text: "Popularly traded currencies compared to USD",
       align: "left",
       style: {
-        color: "#4dd0e1",
+        color: "black",
       },
     },
     xaxis: {

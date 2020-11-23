@@ -1,7 +1,9 @@
 import React, { FunctionComponent, useState } from "react";
-import { TextField, Container, Box, Button } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { TextField, Container, Box } from "@material-ui/core";
 import {forexSearch} from '../../models/forexSearch' 
+import {
+  makeStyles,
+} from '@material-ui/core/styles';
 
 // @ts-ignore
 export interface SearchBarProps {
@@ -14,6 +16,43 @@ export interface SearchBarProps {
 const useStyles = makeStyles({
   root: {
     
+
+  },
+  bootstrapInput: {
+    borderRadius: 4,
+    position: 'relative',
+    backgroundColor: '#2196f3',
+    '&:hover': {
+      backgroundColor: 'white',
+    },   
+
+    border: '1px solid #ced4da',
+    fontSize: 16,
+    width: '100%',
+    padding: '10px 12px',
+    // Use the system font instead of the default Roboto font.
+    fontFamily: [
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
+    '&:focused': {
+      borderRadius: 4,
+      borderColor: '#80bdff',
+      boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
+    },
+  },
+  bootstrapRoot: {
+    'label + &': {
+      marginTop: 1,
+    },
   },
 });
 
@@ -48,12 +87,14 @@ export const SearchBar: FunctionComponent<SearchBarProps> = (props) => {
               margin="dense"
               placeholder="Search for a stock"
               variant="outlined"
-              classes={classes}
               id="stock"
               aria-label="Search for a stock"
               value={stock}
               onChange={(event) => setStock(event.target.value)}
               onKeyDown={(event) => onKeyDownStock(event)}
+              inputProps={{
+                className: classes.bootstrapInput
+              }}
             />
           </Box>
           <Box alignContent="flex-end">
@@ -62,22 +103,26 @@ export const SearchBar: FunctionComponent<SearchBarProps> = (props) => {
               margin="dense"
               placeholder="From Currency"
               variant="outlined"
-              classes={classes}
               id="forexFrom"
               aria-label="Search for a to currency"
               onChange={(event) => setFromCurrency(event.target.value)}
               onKeyDown={(event) => onKeyDownForex(event)}
+              inputProps={{
+                className: classes.bootstrapInput
+              }}
             />{" "}
             <TextField
               size="small"
               margin="dense"
               placeholder="To Currency"
               variant="outlined"
-              classes={classes}
               id="forexTo"
               aria-label="Search for a from currency"
               onChange={(event) => setToCurrency(event.target.value)}
               onKeyDown={(event) => onKeyDownForex(event)}
+              inputProps={{
+                className: classes.bootstrapInput
+              }}
             />
           </Box>
         </Box>

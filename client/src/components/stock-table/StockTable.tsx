@@ -47,7 +47,6 @@ export const StockTable: FunctionComponent<StockTableProps> = (props) => {
       direction="row"
       justify="center"
       alignItems="center"
-      style={{ backgroundColor: "#212121" }}
     >
       <Grid item xs={12} >
         <Grid
@@ -64,7 +63,7 @@ export const StockTable: FunctionComponent<StockTableProps> = (props) => {
         </Grid>
       </Grid>
       <Grid item xs={12}>
-        <Box borderBottom={1} textAlign="center" style={{ color: "#26c6da" }}>
+        <Box borderBottom={1} textAlign="center">
           <h1>{props.stockName}</h1>
           <h2>
             Last Updated: {props.date}
@@ -73,42 +72,42 @@ export const StockTable: FunctionComponent<StockTableProps> = (props) => {
         </Box>
       </Grid>
       <Grid item xs={3}>
-        <Box textAlign="center" style={{ color: "#26c6da" }}>
+        <Box textAlign="center">
           <h3>Current Price</h3>
         </Box>
       </Grid>
       <Grid item xs={3}>
-        <Box textAlign="center" style={{ color: "#26c6da" }}>
+        <Box textAlign="center">
           <h3>Open Price</h3>
         </Box>
       </Grid>
       <Grid item xs={3}>
-        <Box textAlign="center" style={{ color: "#26c6da" }}>
+        <Box textAlign="center">
           <h3>High</h3>
         </Box>
       </Grid>
       <Grid item xs={3}>
-        <Box textAlign="center" style={{ color: "#26c6da" }}>
+        <Box textAlign="center">
           <h3>Low</h3>
         </Box>
       </Grid>
       <Grid item xs={3}>
-        <Box textAlign="center" style={{ color: "#26c6da" }}>
+        <Box textAlign="center">
           <h3>${props.current}</h3>
         </Box>
       </Grid>
       <Grid item xs={3}>
-        <Box textAlign="center" style={{ color: "#26c6da" }}>
+        <Box textAlign="center">
           <h3>${props.open}</h3>
         </Box>
       </Grid>
       <Grid item xs={3}>
-        <Box textAlign="center" style={{ color: "#26c6da" }}>
+        <Box textAlign="center">
           <h3>${props.high}</h3>
         </Box>
       </Grid>
       <Grid item xs={3}>
-        <Box textAlign="center" style={{ color: "#26c6da" }}>
+        <Box textAlign="center">
           <h3>${props.low}</h3>
         </Box>
       </Grid>
