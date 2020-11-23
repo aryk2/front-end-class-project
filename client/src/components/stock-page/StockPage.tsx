@@ -6,12 +6,7 @@ import {
   Box,
   Paper,
 } from "@material-ui/core";
-import Button from '@material-ui/core/Button';
-import Snackbar from '@material-ui/core/Snackbar';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
 import { makeStyles, Theme } from "@material-ui/core/styles";
-import { TrafficRounded } from "@material-ui/icons";
 
 const fetch = require("node-fetch");
 // @ts-ignore
@@ -119,7 +114,7 @@ export const StockPage: FunctionComponent<StockPageProps> = (props) => {
 
   return loaded ? (
     <div>
-      <Box className={classes.root}>
+      <Box className={classes.root} style={{paddingRight: 40}}>
         <Paper className={classes.paper}>
           <Candlechart
             open={open}
@@ -130,7 +125,7 @@ export const StockPage: FunctionComponent<StockPageProps> = (props) => {
           />
         </Paper>
       </Box>
-      <Box className={classes.root}>
+      <Box className={classes.root} style={{paddingRight: 40}}>
         <Paper className={classes.paper}>
           <StockTable
           open={open[0]}
