@@ -50,6 +50,7 @@ export const ForexPage: FunctionComponent<ForexPageProps> = (props) => {
       await fetch(candleUrl)
         .then((response: any) => response.json())
         .then((jsonResponse: any) => {
+          console.log(jsonResponse)
           let temp = JSON.stringify(jsonResponse);
           let openTemp = temp.match(openExp);
           let highTemp = temp.match(highExp);

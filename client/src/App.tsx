@@ -24,7 +24,10 @@ function App() {
                   <Dashboard searchProps={searchProps} homePageProps={homePageProps}/>
                 )}/>
                 <Route path="/forex" exact render={() => (
-                  <Forex searchProps={searchProps}/>
+                  <Forex searchProps={searchProps}
+                    
+                  
+                  />
                 )}/> 
                 <Route path="/stock" exact render={() => (
                   <Stock 

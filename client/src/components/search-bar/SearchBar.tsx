@@ -26,9 +26,16 @@ export const SearchBar: FunctionComponent<SearchBarProps> = (props) => {
   const [fromCurrency, setFromCurrency] = useState(searchForex?.fromCurrency || '');
   const [toCurrency, setToCurrency] = useState(searchForex?.toCurrency || '');
 
-  const onKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+  const onKeyDownStock = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key === 'Enter') {
       handleSearchStock(stock)
+    }
+  }
+
+  const onKeyDownForex = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter') {
+      fromCurrency && toCurrency &&
+      handleSearchForex({fromCurrency, toCurrency})
     }
   }
 
@@ -46,7 +53,7 @@ export const SearchBar: FunctionComponent<SearchBarProps> = (props) => {
               aria-label="Search for a stock"
               value={stock}
               onChange={(event) => setStock(event.target.value)}
-              onKeyDown={(event) => onKeyDown(event)}
+              onKeyDown={(event) => onKeyDownStock(event)}
             />
           </Box>
           <Box alignContent="flex-end">
@@ -59,6 +66,7 @@ export const SearchBar: FunctionComponent<SearchBarProps> = (props) => {
               id="forexFrom"
               aria-label="Search for a to currency"
               onChange={(event) => setFromCurrency(event.target.value)}
+              onKeyDown={(event) => onKeyDownForex(event)}
             />{" "}
             <TextField
               size="small"
@@ -69,16 +77,8 @@ export const SearchBar: FunctionComponent<SearchBarProps> = (props) => {
               id="forexTo"
               aria-label="Search for a from currency"
               onChange={(event) => setToCurrency(event.target.value)}
+              onKeyDown={(event) => onKeyDownForex(event)}
             />
-              <Button
-                variant="contained"
-                size="medium"
-                color="primary"
-                style={{ marginLeft: "3px", marginTop: "9px" }}
-                onClick={() => handleSearchForex({fromCurrency, toCurrency})}
-              >
-                Search
-              </Button>
           </Box>
         </Box>
       </Container>
