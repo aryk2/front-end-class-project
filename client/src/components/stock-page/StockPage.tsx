@@ -17,6 +17,7 @@ export interface StockPageProps {
     handleAddFavorite: (favoriteItem: favoriteItem) => void
     handleRemoveFavorite: (favoriteItem: favoriteItem) => void
   }
+  handleOpenSnackBar: () => void
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -68,6 +69,12 @@ export const StockPage: FunctionComponent<StockPageProps> = (props) => {
           let datesTemp = temp.match(dateExp);
 
           let openArr = [];
+
+          if(!openTemp?.length) {
+            console.error(jsonResponse)
+            props.handleOpenSnackBar()
+            return
+          }
           for (let i = 0; i < openTemp!.length; ++i) {
             openArr.push(openTemp![i].match(numExp));
           }

@@ -1,9 +1,13 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
 import ForexTable from "../forex-table/ForexTable";
 import Candlechart from "../candlechart/Candlechart";
-import { Container, Box } from "@material-ui/core";
-import SearchBar from "../search-bar/SearchBar";
-import { useParams } from "react-router-dom";
+import { makeStyles, Theme } from "@material-ui/core/styles";
+import {
+  Container,
+  Box,
+  Paper,
+} from "@material-ui/core";
+
 const fetch = require("node-fetch");
 // @ts-ignore
 const apiKey = process.env.REACT_APP_ALPHA_VANTAGE_KEY;
@@ -16,9 +20,19 @@ export interface ForexPageProps { // todo fix props
   toCurrency: string
 }
 
+const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    margin: theme.spacing(0, 0, 5),
+  },
+  paper: {
+    padding: theme.spacing(2, 1),
+  },
+}));
+
 export const ForexPage: FunctionComponent<ForexPageProps> = (props) => {
   const { fromCurrency, toCurrency } = props;
-  
+  const classes = useStyles();
+
 
   const [isLoadedCandleQuote, setLoadedCandleQuote] = useState<null | true>(
     null
@@ -102,17 +116,25 @@ export const ForexPage: FunctionComponent<ForexPageProps> = (props) => {
 
   return isLoadedCandleQuote ? (
     <div>
-      <Candlechart
-        open={open}
-        close={close}
-        low={low}
-        high={high}
-        dates={dates}
-      />
-      <ForexTable
-        toCurrencyShort={toCurrency}
-        fromCurrencyShort={fromCurrency}
-      />
+      <Box className={classes.root} style={{paddingRight: 40}}>
+        <Paper className={classes.paper}>
+          <Candlechart
+            open={open}
+            close={close}
+            low={low}
+            high={high}
+            dates={dates}
+          />
+        </Paper>
+      </Box>
+      <Box className={classes.root} style={{paddingRight: 40}}>
+        <Paper className={classes.paper}>
+          <ForexTable
+          toCurrencyShort={toCurrency}
+          fromCurrencyShort={fromCurrency}
+          />
+        </Paper>
+      </Box>
     </div>
   ) : (
     <Container maxWidth="lg">

@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState } from "react";
-import Table, { Button, Grid, Box } from "@material-ui/core";
+import {  Grid, Box } from "@material-ui/core";
 import {favoriteItem} from '../../models/favoriteItem'
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';

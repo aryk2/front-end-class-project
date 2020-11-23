@@ -14,10 +14,15 @@ const useSearch = () => {
 
     const [searchStock, setSearchStock] = useState<string>('');
     const [searchForex, setSearchForex] = useState<forexSearch>(defaultForexSearch);
+    const [loading, setLoading] = useState<boolean>(false);
 
 
     const handleSearchStock = (symbol: string) => {
+        console.log(symbol)
+        setLoading(true);
         setSearchStock(symbol);
+        setLoading(false);
+
     }
 
     const handleSearchForex = (forexSearch: forexSearch) => {
@@ -25,11 +30,13 @@ const useSearch = () => {
     }
 
     useEffect(() => {
+        console.log(searchStock)
+        history.push(ROUTES.home)
         if(searchStock !== '') {
             history.push(ROUTES.stock)
         }
 
-    }, [searchStock])
+    }, [searchStock, loading])
 
     useEffect(() => {
         if(searchForex.fromCurrency !== '') {
