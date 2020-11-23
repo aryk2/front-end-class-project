@@ -1,11 +1,17 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
-import { Box, Grid, Button } from "@material-ui/core";
+import { Box, Grid } from "@material-ui/core";
+import {favoriteItem} from '../../models/favoriteItem'
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
+import Favorite from '@material-ui/icons/Favorite';
 import fetch from "node-fetch";
 // @ts-ignore
 export interface ForexTableProps {
   fromCurrencyShort: string;
   toCurrencyShort: string;
 }
+
 const apiKey = process.env.REACT_APP_ALPHA_VANTAGE_KEY;
 const quoteEndpoint =
   "https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=";
@@ -76,51 +82,54 @@ export const ForexTable: FunctionComponent<ForexTableProps> = (props) => {
         direction="row"
         justify="center"
         alignItems="center"
-        style={{ backgroundColor: "#212121" }}
       >
+        <Grid item xs={12} >
+          <Grid
+            container
+            direction="row"
+            justify="flex-start"
+            alignItems="center"
+            style={{marginLeft: 20}}
+            >            
+            <FormControlLabel
+              control={<Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} name="checkedH" />}
+              label="Favorite"
+            />
+          </Grid>
+        </Grid>
         <Grid item xs={12}>
-          <Box borderBottom={1} textAlign="center" style={{ color: "#26c6da" }}>
+          <Box borderBottom={1} textAlign="center" style={{ color: "black" }}>
             <h1>
               {fromCurrencyLong} to {toCurrencyLong}
-              <span>
-                <Button
-                  size="small"
-                  variant="contained"
-                  color="primary"
-                  style={{ marginLeft: "3px" }}
-                >
-                  Add to Favs
-                </Button>
-              </span>
             </h1>
           </Box>
         </Grid>
-        <Grid item xs={4} style={{ color: "#26c6da" }}>
+        <Grid item xs={4} style={{ color: "black" }}>
           <Box textAlign="center">
             <h2>Bid Price</h2>
           </Box>
         </Grid>
-        <Grid item xs={4} style={{ color: "#26c6da" }}>
+        <Grid item xs={4} style={{ color: "black" }}>
           <Box textAlign="center">
             <h2>Ask Price</h2>
           </Box>
         </Grid>
-        <Grid item xs={4} style={{ color: "#26c6da" }}>
+        <Grid item xs={4} style={{ color: "black" }}>
           <Box textAlign="center">
             <h2>Exchange Rate</h2>
           </Box>
         </Grid>
-        <Grid item xs={4} style={{ color: "#26c6da" }}>
+        <Grid item xs={4} style={{ color: "black" }}>
           <Box textAlign="center">
             <h2>${bid}</h2>
           </Box>
         </Grid>
-        <Grid item xs={4} style={{ color: "#26c6da" }}>
+        <Grid item xs={4} style={{ color: "black" }}>
           <Box textAlign="center">
             <h2>${ask}</h2>
           </Box>
         </Grid>
-        <Grid item xs={4} style={{ color: "#26c6da" }}>
+        <Grid item xs={4} style={{ color: "black" }}>
           <Box textAlign="center">
             <h2>
               1 {fromCurrencyShort} is equivalent to ${exchangeRate}{" "}
