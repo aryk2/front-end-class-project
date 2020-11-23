@@ -22,7 +22,7 @@ export const Candlechart: FunctionComponent<CandlechartProps> = (props) => {
       text: "Three months of trading data",
       align: "left",
       style: {
-        color: "#4dd0e1",
+        color: "black",
       },
     },
 
@@ -30,7 +30,7 @@ export const Candlechart: FunctionComponent<CandlechartProps> = (props) => {
       type: "category",
       labels: {
         style: {
-          colors: "#4dd0e1",
+          color: "black",
         },
       },
     },
@@ -38,7 +38,7 @@ export const Candlechart: FunctionComponent<CandlechartProps> = (props) => {
     yaxis: {
       labels: {
         style: {
-          colors: "#4dd0e1",
+          color: "black",
         },
       },
     },

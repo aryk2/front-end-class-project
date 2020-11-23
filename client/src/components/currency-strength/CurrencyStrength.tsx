@@ -1,6 +1,10 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
-import { Container } from "@material-ui/core";
-import ApexCharts from "apexcharts";
+import {
+  Box,
+  Paper,
+  Typography,
+} from "@material-ui/core";
+import { makeStyles, Theme } from "@material-ui/core/styles";
 import ExchangeRateChart from "../exchange-rate-chart/ExchangeRateChart";
 const apiKey = process.env.REACT_APP_FINNHUB_KEY;
 const usdConversionValues =
@@ -8,9 +12,20 @@ const usdConversionValues =
 // @ts-ignore
 export interface CurrencyStrengthProps {}
 
+const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    margin: theme.spacing(0, 0, 5),
+  },
+  paper: {
+    padding: theme.spacing(2, 1),
+  },
+}));
+
 export const CurrencyStrength: FunctionComponent<CurrencyStrengthProps> = (
   props
 ) => {
+  const classes = useStyles();
+
   const [isLoaded, setLoading] = useState(false);
   const [CAD, setCAD] = useState(0);
   const [GBP, setGBP] = useState(0);
@@ -42,11 +57,19 @@ export const CurrencyStrength: FunctionComponent<CurrencyStrengthProps> = (
     }
   }, []);
 
-  if (isLoaded === false) {
-    return <h1></h1>;
-  } else {
-    return <ExchangeRateChart CAD={CAD} GBP={GBP} KWD={KWD} EUR={EUR} />;
-  }
+  return (  
+    <Box className={classes.root}>
+      <Paper className={classes.paper}>
+
+      {isLoaded ? 
+          <ExchangeRateChart CAD={CAD} GBP={GBP} KWD={KWD} EUR={EUR} />
+          : 
+          <Typography>loading</Typography>
+
+          }
+      </Paper>
+    </Box>
+  )
 };
 
 export default CurrencyStrength;

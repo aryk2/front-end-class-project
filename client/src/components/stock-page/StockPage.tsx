@@ -2,6 +2,11 @@ import React, { FunctionComponent, useState, useEffect } from "react";
 import Candlechart from "../candlechart/Candlechart";
 import StockTable from "../stock-table/StockTable";
 import {favoriteItem} from '../../models/favoriteItem'
+import {
+  Box,
+  Paper,
+} from "@material-ui/core";
+import { makeStyles, Theme } from "@material-ui/core/styles";
 
 const fetch = require("node-fetch");
 // @ts-ignore
@@ -14,10 +19,20 @@ export interface StockPageProps {
   }
 }
 
+const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    margin: theme.spacing(0, 0, 5),
+  },
+  paper: {
+    padding: theme.spacing(2, 1),
+  },
+}));
+
 const apiKey = process.env.REACT_APP_ALPHA_VANTAGE_KEY;
 
 export const StockPage: FunctionComponent<StockPageProps> = (props) => {
   const { stock } = props;
+  const classes = useStyles();
 
   const [open, setOpen] = useState<any>(null);
   const [close, setClose] = useState<any>(null);
@@ -92,23 +107,31 @@ export const StockPage: FunctionComponent<StockPageProps> = (props) => {
 
   return loaded ? (
     <div>
-      <Candlechart
-        open={open}
-        close={close}
-        high={high}
-        low={low}
-        dates={dates}
-      />
-      <StockTable
-        open={open[0]}
-        high={high[0]}
-        low={low[0]}
-        previousClose={close[0]}
-        stockName={stock}
-        date={dates[0]}
-        current={open[0]}
-        favoriteFunctions={props.favoriteFunctions}
-      />
+      <Box className={classes.root} style={{paddingRight: 40}}>
+        <Paper className={classes.paper}>
+          <Candlechart
+            open={open}
+            close={close}
+            high={high}
+            low={low}
+            dates={dates}
+          />
+        </Paper>
+      </Box>
+      <Box className={classes.root} style={{paddingRight: 40}}>
+        <Paper className={classes.paper}>
+          <StockTable
+          open={open[0]}
+          high={high[0]}
+          low={low[0]}
+          previousClose={close[0]}
+          stockName={stock}
+          date={dates[0]}
+          current={open[0]}
+          favoriteFunctions={props.favoriteFunctions}
+        />
+        </Paper>
+      </Box>
     </div>
   ) : (
     <h1></h1>

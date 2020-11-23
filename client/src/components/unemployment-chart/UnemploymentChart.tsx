@@ -33,14 +33,13 @@ export const UnemploymentChart: FunctionComponent<UnemploymentChartProps> = (
     chart: {
       height: "50%",
       width: "50%",
-      background: "#212121",
       foreColor: "#333333",
     },
     title: {
       text: "2019-2020 US Unemployment Statistics",
       align: "left",
       style: {
-        color: "#4dd0e1",
+        color: "black",
       },
     },
     xaxis: {
@@ -59,33 +58,33 @@ export const UnemploymentChart: FunctionComponent<UnemploymentChartProps> = (
       labels: {
         style: {
           colors: [
-            "#4dd0e1",
-            "#4dd0e1",
-            "#4dd0e1",
-            "#4dd0e1",
-            "#4dd0e1",
-            "#4dd0e1",
-            "#4dd0e1",
-            "#4dd0e1",
-            "#4dd0e1",
-            "#4dd0e1",
+            "black",
+            "black",
+            "black",
+            "black",
+            "black",
+            "black",
+            "black",
+            "black",
+            "black",
+            "black",
           ],
         },
       },
     },
     legend: {
       labels: {
-        colors: "#4dd0e1",
+        colors: "black",
       },
     },
     yaxis: {
       labels: {
         style: {
-          colors: ["#4dd0e1"],
+          colors: ["black"],
         },
       },
     },
-    colors: ["#e53935", "#ffff00"],
+    colors: ["#e53935", "#007bff"],
   };
 
   const series = [

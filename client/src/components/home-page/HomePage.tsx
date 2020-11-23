@@ -28,8 +28,9 @@ export const HomePage: FunctionComponent<HomePageProps> = (props) => {
       justify="flex-start"
       alignContent="center"
       spacing={1}
+      style={{paddingRight: 40}}
     >
-      <Grid item xs={12} style={{paddingRight: 40}}>
+      <Grid item xs={12}>
         {!!!props.test ? 
           <StockCarousel favoriteItems={favoriteItems} searchProps={props.searchProps}/> 
         : 
@@ -37,13 +38,13 @@ export const HomePage: FunctionComponent<HomePageProps> = (props) => {
         }
       </Grid>    
 
-      <Grid item xs={6}>
+      <Grid item xs={12}>
         <LaborInformation />
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={12} sm={6}>
         <CurrencyStrength />
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={12} sm={6}>
         <Newsfeed />
       </Grid>
     </Grid>
