@@ -19,11 +19,16 @@ steps:
     args: ['run', 'build']
     env:
       - FIREBASE_TOKEN=$_FIREBASE_TOKEN
-
+      - REACT_APP_ALPHA_VANTAGE_KEY=$_REACT_APP_ALPHA_VANTAGE_KEY
+      - REACT_APP_BLS_KEY=$_REACT_APP_BLS_KEY
+      - REACT_APP_FINNHUB_KEY=$_REACT_APP_FINNHUB_KEY
   - id:  Deploy static build to firebase hosting
     name: node:12.16.2
     dir: 'client'
     env:
       - FIREBASE_TOKEN=$_FIREBASE_TOKEN
+      - REACT_APP_ALPHA_VANTAGE_KEY=$_REACT_APP_ALPHA_VANTAGE_KEY
+      - REACT_APP_BLS_KEY=$_REACT_APP_BLS_KEY
+      - REACT_APP_FINNHUB_KEY=$_REACT_APP_FINNHUB_KEY
     entrypoint: npm
     args: ['run', 'deploy:hosting', '--', '--token', '$_FIREBASE_TOKEN']

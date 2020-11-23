@@ -4,7 +4,8 @@ import Layout from '../../components/layout/Layout'
 import {PageProps} from '../../models/pageProps'
 
 // @ts-ignore
-export interface ForexProps extends PageProps {}
+export interface ForexProps extends PageProps {
+}
 
 export const Forex: FunctionComponent<ForexProps> = (props) => {
 
