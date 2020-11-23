@@ -35,10 +35,10 @@ export const StockTable: FunctionComponent<StockTableProps> = (props) => {
   const handleFavoriteChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFavorite(event.target.checked)
     if(event.target.checked) {
-      handleAddFavorite({symbol: props.stockName})
+      handleAddFavorite({type: 'stock', symbol: props.stockName})
       return
     }
-    handleRemoveFavorite({symbol: props.stockName})
+    handleRemoveFavorite({type: 'stock', symbol: props.stockName})
   }
 
   return (
@@ -64,7 +64,7 @@ export const StockTable: FunctionComponent<StockTableProps> = (props) => {
       </Grid>
       <Grid item xs={12}>
         <Box borderBottom={1} textAlign="center">
-          <h1>{props.stockName}</h1>
+          <h1>{props.stockName.toUpperCase()}</h1>
           <h2>
             Last Updated: {props.date}
 

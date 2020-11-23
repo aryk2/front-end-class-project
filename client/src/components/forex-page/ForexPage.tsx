@@ -7,6 +7,8 @@ import {
   Box,
   Paper,
 } from "@material-ui/core";
+import {favoriteItem} from '../../models/favoriteItem'
+
 
 const fetch = require("node-fetch");
 // @ts-ignore
@@ -18,6 +20,12 @@ const candleEndpoint =
 export interface ForexPageProps { // todo fix props
   fromCurrency: string
   toCurrency: string
+  favoriteFunctions: {
+    favorites: favoriteItem[]
+    handleAddFavorite: (favoriteItem: favoriteItem) => void
+    handleRemoveFavorite: (favoriteItem: favoriteItem) => void
+  }
+  handleOpenSnackBar: () => void
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -73,6 +81,13 @@ export const ForexPage: FunctionComponent<ForexPageProps> = (props) => {
           let datesTemp = temp.match(dateExp);
 
           let openArr;
+
+          if(!openTemp?.length) {
+            console.error(jsonResponse)
+            props.handleOpenSnackBar()
+            return
+          }
+
           for (let i = 1; i < openTemp!.length; ++i) {
             openTemp![0] += openTemp![i];
           }
@@ -132,6 +147,7 @@ export const ForexPage: FunctionComponent<ForexPageProps> = (props) => {
           <ForexTable
           toCurrencyShort={toCurrency}
           fromCurrencyShort={fromCurrency}
+          favoriteFunctions={props.favoriteFunctions}
           />
         </Paper>
       </Box>

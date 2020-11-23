@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react'
 
 const apiKey = process.env.REACT_APP_ALPHA_VANTAGE_KEY;
 
-const useStockCard = (symbol: string) => {
+const useStockCard = (symbol: string, type: 'stock' | 'forex') => {
 
     const [loaded, setLoaded] = useState<null | true>(null);
     const [current, setCurrent] = useState<any>(null);
@@ -31,6 +31,11 @@ const useStockCard = (symbol: string) => {
               console.error(err);
             });
         };
+        if (type === 'forex') { 
+          setLoaded(true);
+          setCurrent('');
+          return
+        }
         if (loaded === true) {
           setLoaded(null);
           getData(endpoint);

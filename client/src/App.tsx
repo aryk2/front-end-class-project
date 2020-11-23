@@ -25,7 +25,11 @@ function App() {
                 )}/>
                 <Route path="/forex" exact render={() => (
                   <Forex searchProps={searchProps}
-                    
+                  favoriteFunctions={{
+                    favorites: homePageProps.favoriteItems,
+                    handleAddFavorite: homePageProps.handleAddFavorite, 
+                    handleRemoveFavorite: homePageProps.handleRemoveFavorite
+                  }}
                   
                   />
                 )}/> 

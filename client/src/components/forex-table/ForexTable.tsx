@@ -10,6 +10,17 @@ import fetch from "node-fetch";
 export interface ForexTableProps {
   fromCurrencyShort: string;
   toCurrencyShort: string;
+  favoriteFunctions: {
+    favorites: favoriteItem[]
+    handleAddFavorite: (favoriteItem: favoriteItem) => void
+    handleRemoveFavorite: (favoriteItem: favoriteItem) => void
+  }
+}
+
+const isFavorite = (favorites: favoriteItem[], symbol: string): boolean => {
+  if (!favorites) return false
+  const favoritesList: favoriteItem[] = favorites.filter((favorite) => favorite.symbol === symbol)
+  return !!favoritesList.length
 }
 
 const apiKey = process.env.REACT_APP_ALPHA_VANTAGE_KEY;
@@ -17,9 +28,13 @@ const quoteEndpoint =
   "https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=";
 
 export const ForexTable: FunctionComponent<ForexTableProps> = (props) => {
+  const {favorites, handleAddFavorite, handleRemoveFavorite} = props.favoriteFunctions
+  const [favorite, setFavorite] = useState<boolean>(isFavorite(favorites, props.fromCurrencyShort+'-'+props.toCurrencyShort))
+
   const [fromCurrencyShort, setFromCurrencyShort] = useState(
     props.fromCurrencyShort
   );
+  
   const [toCurrencyShort, setToCurrencyShort] = useState(props.toCurrencyShort);
   const [fromCurrencyLong, setFromCurrencyLong] = useState("");
   const [toCurrencyLong, setToCurrencyLong] = useState("");
@@ -74,6 +89,15 @@ export const ForexTable: FunctionComponent<ForexTableProps> = (props) => {
     }
   }, []);
 
+  const handleFavoriteChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFavorite(event.target.checked)
+    if(event.target.checked) {
+      handleAddFavorite({type: 'forex', symbol: props.fromCurrencyShort+'-'+props.toCurrencyShort})
+      return
+    }
+    handleRemoveFavorite({type: 'forex', symbol: props.fromCurrencyShort+'-'+props.toCurrencyShort})
+  }
+
   if (isLoadedCurrentQuote === true) {
     return (
       <Grid
@@ -92,7 +116,7 @@ export const ForexTable: FunctionComponent<ForexTableProps> = (props) => {
             style={{marginLeft: 20}}
             >            
             <FormControlLabel
-              control={<Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} name="checkedH" />}
+              control={<Checkbox checked={favorite} onChange={handleFavoriteChange} icon={<FavoriteBorder />} checkedIcon={<Favorite />} name="checkedH" />}
               label="Favorite"
             />
           </Grid>
@@ -100,7 +124,7 @@ export const ForexTable: FunctionComponent<ForexTableProps> = (props) => {
         <Grid item xs={12}>
           <Box borderBottom={1} textAlign="center" style={{ color: "black" }}>
             <h1>
-              {fromCurrencyLong} to {toCurrencyLong}
+              {fromCurrencyLong.toUpperCase()} to {toCurrencyLong.toUpperCase()}
             </h1>
           </Box>
         </Grid>

@@ -56,7 +56,10 @@ export const StockCarousel: FunctionComponent<StockCarouselProps> = (props) => {
           props.favoriteItems ?
             props.favoriteItems.map((favorite, index) => {
               return (
-                <div id={String(index)}><StockCard symbol={favorite.symbol} handleStockSearch={props.searchProps.handleSearchStock}/></div>
+                <div id={String(index)}><StockCard symbol={favorite.symbol} type={favorite.type} 
+                handleStockSearch={props.searchProps.handleSearchStock}
+                handleForexSearch={props.searchProps.handleSearchForex}
+                /></div>
               )
             })
           :
