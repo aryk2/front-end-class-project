@@ -39,13 +39,15 @@ export const StockCard: FunctionComponent<StockCardProps> = (props) => {
   const {loaded, current} = useStockCard(props.symbol, props.type)
 
   const handleForexSearch = () => {
-    console.log(props.symbol.split('-')[0])
-    console.log(props.symbol.split('-')[1])
     const searchForex = {
       fromCurrency: props.symbol.split('-')[0],
-      toCurrency: '',
+      toCurrency: props.symbol.split('-')[1],
     }
-    // props.handleForexSearch(searchForex)
+    props.handleForexSearch(searchForex)
+  }
+
+  const formatForexInfo = () => {
+    return '1 '+props.symbol.split('-')[0]+' is equivalent to '+current+' '+props.symbol.split('-')[1]
   }
 
   return (
@@ -55,9 +57,15 @@ export const StockCard: FunctionComponent<StockCardProps> = (props) => {
           <Typography className={classes.title} color="textSecondary" gutterBottom>
             {(props.type === 'stock' ? 'Stock' : 'Forex')+': '+props.symbol}
           </Typography>
-          <Typography className={classes.pos} variant={'h5'}>
-            {loaded ? current : 'loading'}
-          </Typography>
+          {props.type === 'stock' ?
+             <Typography className={classes.pos} variant={'h5'}>
+                {loaded ? current : 'loading'}
+              </Typography>
+          :
+              <Typography className={classes.pos} variant={'body1'}>
+                {loaded ? formatForexInfo() : 'loading'}
+            </Typography> 
+          }
         </CardContent>
         <CardActions>
           {props.type === 'stock' ?

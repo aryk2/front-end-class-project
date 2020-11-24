@@ -1,14 +1,14 @@
 import React from "react"
 // also exported from '@storybook/react' if you can deal with breaking changes in 6.1
 import { Meta, Story } from "@storybook/react/types-6-0"
-import { NewsPage as Component } from "./NewsPage"
+import { NewsStories as Component } from "./NewsStories"
 
 const storybookContainerStyle = {
   padding: '2em'
 }
 
 export default {
-  title: "NewsPage",
+  title: "NewsStories",
   component: Component,
   argTypes: {},
   decorators: [
@@ -22,5 +22,5 @@ export default {
 
 const Template: Story<any> = (args) => <Component {...args} />
 
-export const NewsPage = Template.bind({})
-NewsPage.args = {}
+export const NewsStories = Template.bind({})
+NewsStories.args = {}

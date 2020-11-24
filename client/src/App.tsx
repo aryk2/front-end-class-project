@@ -3,8 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import './App.css';
 
 import Dashboard from './pages/dashboard'
-// todo pick a better name
-import Graphs from './pages/other-graphs/Graphs'
+import News from './pages/news/News'
 import Error from './pages/error'
 import Forex from './pages/forex'
 import Stock from './pages/stock'
@@ -42,6 +41,11 @@ function App() {
                       handleAddFavorite: homePageProps.handleAddFavorite, 
                       handleRemoveFavorite: homePageProps.handleRemoveFavorite
                     }}
+                  />
+                )}/> 
+                <Route path="/news" exact render={() => (
+                  <News 
+                    searchProps={searchProps} 
                   />
                 )}/> 
 

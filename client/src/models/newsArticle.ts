@@ -35,4 +35,5 @@ export interface NewsStory {
     date: Date
     headline: string
     link: string
+    summary?: string
 }

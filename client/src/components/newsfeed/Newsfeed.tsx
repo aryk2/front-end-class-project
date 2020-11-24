@@ -11,6 +11,8 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import WebIcon from "@material-ui/icons/Web";
+import { useHistory } from 'react-router-dom';
+import ROUTES from '../../models/routes'
 
 import useNewsStories from "../../hooks/useNewsStories";
 export interface NewsFeedProps {
@@ -59,7 +61,9 @@ const newsCall =
   "https://finnhub.io/api/v1/news?category=general&token=" + apiKey;
 
 
-export interface NewsfeedProps {}
+export interface NewsfeedProps {
+  amnt: number
+}
 
 const staticText = {
   hour: " hour ago",
@@ -67,13 +71,14 @@ const staticText = {
   day: " day ago",
   days: " days ago",
   title: "News",
-  readAll: "Go to news",
+  readAll: "See more articles",
 };
 
 
 export const Newsfeed: FunctionComponent<NewsfeedProps> = (props) => {
   const classes = useStyles();
   const {isLoaded, stories, amntLoaded} = useNewsStories()
+  const history = useHistory();
 
   const handleRedirect = (url: string) => {
     if (url === "") return;
@@ -119,7 +124,7 @@ export const Newsfeed: FunctionComponent<NewsfeedProps> = (props) => {
         <Grid container direction={"column"} className={classes.newsItems}>
 
           {isLoaded ? 
-            stories.slice(0, 3)?.map((story, index) => (
+            stories.slice(0, props.amnt)?.map((story, index) => (
             <Grid
               item
               className={classes.hover}
@@ -127,8 +132,13 @@ export const Newsfeed: FunctionComponent<NewsfeedProps> = (props) => {
               onClick={() => handleRedirect(story.link)}
             >
               <Grid className={classes.newsItem}>
-                <Typography>{story.headline}</Typography>
-                <Typography>{dateFormat(story.date)}</Typography>
+                <Typography>{story.headline} - {dateFormat(story.date)} </Typography>
+                {props.amnt > 3 ? 
+                  <Typography variant={'body2'}>{story.summary}</Typography>
+                : 
+                  null
+                }
+
               </Grid>
             </Grid>
           ))
@@ -137,6 +147,8 @@ export const Newsfeed: FunctionComponent<NewsfeedProps> = (props) => {
 
         }
           <Divider variant="middle" className={classes.bottomSection} />
+          {props.amnt > 3 ? null :
+          
           <Grid item className={classes.hover}>
             <Grid
               container
@@ -144,7 +156,7 @@ export const Newsfeed: FunctionComponent<NewsfeedProps> = (props) => {
               direction={"row"}
               alignItems={"center"}
               className={classes.bottomSection}
-              onClick={() => handleRedirect("all news")}
+              onClick={() => history.push(ROUTES.news)}
             >
               <ArrowForwardIcon fontSize="large" />
               <Typography style={{ paddingLeft: 10 }}>
@@ -152,6 +164,7 @@ export const Newsfeed: FunctionComponent<NewsfeedProps> = (props) => {
               </Typography>
             </Grid>
           </Grid>
+          }
         </Grid>
       </Paper>
     </Box>
