@@ -5,6 +5,11 @@ import {
   makeStyles,
 } from '@material-ui/core/styles';
 
+
+import FormControl from '@material-ui/core/FormControl';
+import FilledInput from '@material-ui/core/FilledInput';
+import InputLabel from '@material-ui/core/InputLabel';
+
 // @ts-ignore
 export interface SearchBarProps {
   searchStock: string
@@ -15,13 +20,28 @@ export interface SearchBarProps {
 
 const useStyles = makeStyles({
   root: {
-    
-
+    "& .MuiOutlinedInput-notchedOutline": { borderColor: "black" },
+    "& .MutInputBase-input": { color: "black" },
+    "& .MuiInputBase-root": { color: "black" },
+    "& label.Mui-focused": { color: "black" },
+    "& .MuiInput-underline:after": { borderBottomColor: "black" },
+    "& .MuiOutlinedInput-root": {
+      "&fieldset": {
+        borderColor: "#black",
+        color: "#white",
+      },
+      "&:hover fieldset": {
+        borderColor: "#black",
+        color: "#black",
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: "#black",
+        color: "#black",
+      },
+    },
   },
   bootstrapInput: {
-    borderRadius: 4,
-    position: 'relative',
-    backgroundColor: '#2196f3',
+    
     '&:hover': {
       backgroundColor: 'white',
     },   
@@ -94,7 +114,9 @@ export const SearchBar: FunctionComponent<SearchBarProps> = (props) => {
               onKeyDown={(event) => onKeyDownStock(event)}
               inputProps={{
                 className: classes.bootstrapInput
+                
               }}
+              
             />
           </Box>
           <Box alignContent="flex-end">
