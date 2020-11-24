@@ -45,7 +45,7 @@ export const HomePage: FunctionComponent<HomePageProps> = (props) => {
         <CurrencyStrength />
       </Grid>
       <Grid item xs={12} sm={6}>
-        <Newsfeed />
+        <Newsfeed amnt={3}/>
       </Grid>
     </Grid>
   );

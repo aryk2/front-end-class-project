@@ -14,7 +14,6 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { useHistory } from 'react-router-dom';
 import HomeIcon from '@material-ui/icons/Home';
-import TimelineIcon from '@material-ui/icons/Timeline';
 import SearchBar from '../search-bar/SearchBar'
 import {forexSearch} from '../../models/forexSearch'
 
