@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState } from "react";
-import { TextField, Container, Box } from "@material-ui/core";
+import { TextField, Container, Box, Typography } from "@material-ui/core";
 import {forexSearch} from '../../models/forexSearch' 
 import {
   makeStyles,
@@ -41,7 +41,7 @@ const useStyles = makeStyles({
     },
   },
   bootstrapInput: {
-    
+    backgroundColor: '#dbdbdb',
     '&:hover': {
       backgroundColor: 'white',
     },   
